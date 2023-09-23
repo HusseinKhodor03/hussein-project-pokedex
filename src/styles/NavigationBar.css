@@ -1,0 +1,39 @@
+/* Navigation Bar */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 3rem 2rem;
+}
+
+.nav-wrapper {
+  background: #b31312;
+}
+
+.nav__brand {
+  display: flex;
+}
+
+.nav__logo {
+  width: 48px;
+  height: 48px;
+  margin-right: 1rem;
+}
+
+.nav__image {
+  width: 80px;
+  height: 80px;
+}
+
+.nav__logo-text {
+  font-size: 3.8rem;
+  color: #fff;
+}
+
+@media screen and (min-width: 595px) {
+  .nav {
+    padding: 3rem 0;
+  }
+}

@@ -1,0 +1,24 @@
+/* Search Input */
+.input {
+  padding: 1rem;
+  border-radius: 30px;
+  border: 0;
+  outline: none;
+  flex-grow: 1;
+  font-family: "Pokemon Solid", sans-serif;
+  width: 100%;
+}
+
+.input::placeholder {
+  font-family: "Pokemon Solid", sans-serif;
+}
+
+.input-group {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  width: 30rem;
+}

@@ -20,6 +20,7 @@ body {
   font-family: "Pokemon Solid", sans-serif;
   font-size: 1.8rem;
   color: #fff;
+  margin: 0;
 }
 
 h1,
@@ -44,4 +45,9 @@ p {
   p {
     font-size: 2.4rem;
   }
+}
+
+/* Links */
+a {
+  text-decoration: none;
 }
