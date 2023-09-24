@@ -1,0 +1,21 @@
+/* Banner */
+.banner {
+  background-image: url(../assets//banner.jpg);
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
+
+.banner h3 {
+  color: #000;
+  margin: 0;
+}
+
+.banner h1 {
+  margin: 0 0 3rem;
+}
+
+.banner__content {
+  padding: 5rem 3rem 0;
+}
