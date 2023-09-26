@@ -62,7 +62,9 @@ function MenuBar() {
             >
               <ul className="list">
                 {generations?.results.map((generation) => (
-                  <li className="list__item">{generation.name}</li>
+                  <li className="list__item" key={generation.name}>
+                    {generation.name}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -87,7 +89,9 @@ function MenuBar() {
             >
               <ul className="list">
                 {types?.results.map((type) => (
-                  <li className="list__item">{type.name}</li>
+                  <li className="list__item" key={type.name}>
+                    {type.name}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -112,7 +116,9 @@ function MenuBar() {
             >
               <ul className="list">
                 {regions?.results.map((region) => (
-                  <li className="list__item">{region.name}</li>
+                  <li className="list__item" key={region.name}>
+                    {region.name}
+                  </li>
                 ))}
               </ul>
             </div>
