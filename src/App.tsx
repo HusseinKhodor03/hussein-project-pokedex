@@ -1,7 +1,7 @@
 import Banner from "./components/Banner";
 import MenuBar from "./components/MenuBar";
 import NavigationBar from "./components/NavigationBar";
-import PokemonCard from "./components/PokemonCard";
+import PokemonGrid from "./components/PokemonGrid";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <NavigationBar />
       <MenuBar />
       <Banner />
-      <PokemonCard />
+      <PokemonGrid />
     </>
   );
 }

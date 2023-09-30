@@ -1,5 +1,6 @@
 /* Pokemon Card */
 .pokemon-card {
+  flex-shrink: 0;
   background: #b31312;
   width: 240px;
   height: 320px;
@@ -25,5 +26,6 @@
 
 .pokemon-card__heading {
   text-transform: capitalize;
+  letter-spacing: 3px;
   font-size: 2.3rem;
 }
