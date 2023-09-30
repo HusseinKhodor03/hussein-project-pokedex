@@ -1,0 +1,36 @@
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  letter-spacing: 2px;
+  padding: 1.5vh 2.5vw;
+}
+
+.footer-wrapper {
+  background: #b31312;
+}
+
+.footer__logo {
+  width: 22px;
+  height: 22px;
+  margin-right: 1rem;
+  transform: translateY(3px);
+}
+
+.footer__logo-text {
+  font-size: 2rem;
+}
+
+.footer__text {
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.footer__image {
+  width: 40px;
+  height: 40px;
+}
