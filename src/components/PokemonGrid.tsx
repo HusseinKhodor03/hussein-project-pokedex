@@ -5,7 +5,17 @@ import PokemonCard from "./PokemonCard";
 import "../styles/PokemonGrid.css";
 
 function PokemonGrid() {
-  const generations: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const generations: string[] = [
+    "Generation-I",
+    "Generation-II",
+    "Generation-III",
+    "Generation-IV",
+    "Generation-V",
+    "Generation-VI",
+    "Generation-VII",
+    "Generation-VIII",
+    "Generation-IX",
+  ];
   const offsets: number[] = [0, 151, 251, 386, 494, 649, 721, 809, 905];
   const data: Pokemon[][] = [];
 
@@ -38,7 +48,7 @@ function PokemonGrid() {
       {groupedPokemon.map((generationPokemon, generationIndex) => (
         <div className="container pokemon-home">
           <h2 className="pokemon-home__heading">
-            Generation {generations[generationIndex]}
+            {generations[generationIndex]}
           </h2>
           <div key={generationIndex} className="pokemon-home__generation">
             {generationPokemon.map((pokemon) => (
@@ -46,7 +56,7 @@ function PokemonGrid() {
             ))}
           </div>
           <button className="pokemon-home__button">
-            See more Pokémon from Generation {generations[generationIndex]}
+            See more Pokémon from {generations[generationIndex]}
           </button>
         </div>
       ))}
