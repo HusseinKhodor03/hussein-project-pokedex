@@ -7,14 +7,14 @@ import "../styles/PokemonGrid.css";
 function PokemonGrid() {
   const generations: string[] = [
     "Generation-I",
-    "Generation-II",
-    "Generation-III",
-    "Generation-IV",
+    "Generation-Ii",
+    "Generation-Iii",
+    "Generation-Iv",
     "Generation-V",
-    "Generation-VI",
-    "Generation-VII",
-    "Generation-VIII",
-    "Generation-IX",
+    "Generation-Vi",
+    "Generation-Vii",
+    "Generation-Viii",
+    "Generation-Ix",
   ];
   const offsets: number[] = [0, 151, 251, 386, 494, 649, 721, 809, 905];
   const data: Pokemon[][] = [];
