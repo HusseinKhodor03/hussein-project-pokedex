@@ -1,0 +1,48 @@
+/* Error Page */
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3vh 4vw;
+  gap: 3vh;
+}
+
+.error__heading {
+  font-size: 3.5rem;
+  letter-spacing: 3px;
+  margin: 0;
+}
+
+.error__image {
+  background-image: url(../assets/errorimage.png);
+  background-repeat: no-repeat;
+  background-size: 140%;
+  background-position: center;
+  min-height: 200px;
+  min-width: 200px;
+}
+
+.error__text {
+  color: #3f3d43;
+  margin: 0;
+  font-size: 2.5rem;
+  letter-spacing: 1.5px;
+}
+
+.error__btn {
+  background: #b31312;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 3rem;
+  border-radius: 2.3rem;
+  cursor: pointer;
+  font-family: "Pokemon Solid", sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 1.5px;
+  transition: transform 0.5s;
+}
+
+.error__btn:hover {
+  transform: scale(1.05);
+}
