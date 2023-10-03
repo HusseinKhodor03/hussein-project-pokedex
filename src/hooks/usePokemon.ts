@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Pokemon from "../entities/Pokemon";
 import APIClient from "../services/api-client";
 
-function usePokemon(offset: number) {
+function usePokemon(offset: number, limit: number) {
   const pokemonService = new APIClient<Pokemon>("/pokemon/");
 
   return useQuery({
@@ -10,7 +10,7 @@ function usePokemon(offset: number) {
     queryFn: () =>
       pokemonService.getAll({
         params: {
-          limit: 5,
+          limit: limit,
           offset: offset,
         },
       }),

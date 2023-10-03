@@ -3,9 +3,14 @@ import usePokemon from "../hooks/usePokemon";
 import usePokemonDetails from "../hooks/usePokemonDetails";
 import PokemonCard from "./PokemonCard";
 import "../styles/PokemonGrid.css";
+import { useNavigate } from "react-router-dom";
+import useGenerations from "../hooks/useGenerations";
 
 function PokemonGrid() {
-  const generations: string[] = [
+  const navigate = useNavigate();
+  const { data: generations } = useGenerations();
+
+  const generationNames: string[] = [
     "Generation-I",
     "Generation-Ii",
     "Generation-Iii",
@@ -16,10 +21,11 @@ function PokemonGrid() {
     "Generation-Viii",
     "Generation-Ix",
   ];
+
   const offsets: number[] = [0, 151, 251, 386, 494, 649, 721, 809, 905];
   const data: Pokemon[][] = [];
 
-  const fetchPromises = offsets.map((offset) => usePokemon(offset));
+  const fetchPromises = offsets.map((offset) => usePokemon(offset, 5));
   const responses = fetchPromises;
 
   responses.forEach((response) => {
@@ -45,18 +51,21 @@ function PokemonGrid() {
 
   return (
     <>
-      {groupedPokemon.map((generationPokemon, generationIndex) => (
+      {groupedPokemon.map((generationPokemon, index) => (
         <div className="container pokemon-home">
-          <h2 className="pokemon-home__heading">
-            {generations[generationIndex]}
-          </h2>
-          <div key={generationIndex} className="pokemon-home__generation">
+          <h2 className="pokemon-home__heading">{generationNames[index]}</h2>
+          <div key={index} className="pokemon-home__generation">
             {generationPokemon.map((pokemon) => (
               <PokemonCard key={pokemon.id} pokemon={pokemon} />
             ))}
           </div>
-          <button className="pokemon-home__button">
-            See more Pokémon from {generations[generationIndex]}
+          <button
+            className="pokemon-home__button"
+            onClick={() =>
+              navigate(`/generation/${generations?.results[index].name}`)
+            }
+          >
+            See more Pokémon from {generationNames[index]}
           </button>
         </div>
       ))}

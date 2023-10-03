@@ -40,6 +40,12 @@ class APIClient<T> {
 
     return Promise.all(requests);
   };
+
+  get = (id: string) => {
+    return axiosInstance
+      .get<T>(this.endpoint + id)
+      .then((response) => response.data);
+  };
 }
 
 export default APIClient;

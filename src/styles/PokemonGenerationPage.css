@@ -1,0 +1,42 @@
+/* Generation Page */
+.pokemon-gen {
+  padding: 3vh 4vw;
+}
+
+.pokemon-gen__heading {
+  margin: 0;
+  text-transform: capitalize;
+  color: #b31212;
+  font-size: 3rem;
+  letter-spacing: 1.5px;
+}
+
+.pokemon-gen__cards {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
+  padding: 2rem 1.5rem;
+}
+
+.pokemon-gen__btn {
+  background: #b31212;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.8rem 3rem;
+  border-radius: 2.3rem;
+  font-family: "Pokemon Solid", sans-serif;
+  letter-spacing: 1.5px;
+  font-size: 2.5rem;
+  transition: transform 0.5s;
+}
+
+.pokemon-gen__btn:hover {
+  transform: scale(1.05);
+}
+
+.pokemon-gen__btn-container {
+  display: flex;
+  justify-content: center;
+}
