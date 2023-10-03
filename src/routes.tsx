@@ -3,6 +3,7 @@ import Layout from "./pages/Layout";
 import HomePage from "./pages/HomePage";
 import PokemonGenerationPage from "./pages/PokemonGenerationPage";
 import ErrorPage from "./pages/ErrorPage";
+import PokemonDetailPage from "./pages/PokemonDetailPage";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "generation/:name", element: <PokemonGenerationPage /> },
+      { path: "pokemon/:name", element: <PokemonDetailPage /> },
     ],
   },
 ]);
