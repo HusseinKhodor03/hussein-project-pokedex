@@ -30,25 +30,27 @@ function PokemonDetailPage() {
   const { data: nearbyPokemon } = usePokemonDetails(names);
 
   function getTypeColor(typeName: string) {
-    const typeColorMap: { [type: string]: string } = {
-      water: "#4e4feb",
-      grass: "#1a5d1a",
-      fighting: "#8c3333",
-      bug: "#b5c99a",
-      steel: "#ffeaea",
-      dragon: "#164b60",
-      ice: "#c5dff8",
-      electric: "#f1c93b",
-      dark: "#000",
-      normal: "#eee",
-      ground: "#e9b384",
-      ghost: "#9681eb",
-      fire: "#fe0000",
-      rock: "#7d7463",
-      psychic: "#ff52a2",
-      poison: "#6528f7",
-      fairy: "#ffd0d0",
-      flying: "#b7b7b7",
+    const typeColorMap: {
+      [type: string]: { background: string; border: string; color: string };
+    } = {
+      water: { background: "#4e4feb", border: "#fff", color: "#fff" },
+      grass: { background: "#1a5d1a", border: "#fff", color: "#fff" },
+      fighting: { background: "#8c3333", border: "#fff", color: "#fff" },
+      bug: { background: "#b5c99a", border: "#202020", color: "#202020" },
+      steel: { background: "#ffeaea", border: "#3f2305", color: "#3f2305" },
+      dragon: { background: "#164b60", border: "#fff", color: "#fff" },
+      ice: { background: "#c5dff8", border: "#202020", color: "#202020" },
+      electric: { background: "#f1c93b", border: "#202020", color: "#202020" },
+      dark: { background: "#000", border: "#bfbfbf", color: "#bfbfbf" },
+      normal: { background: "#eee", border: "#202020", color: "#202020" },
+      ground: { background: "#e9b384", border: "#202020", color: "#202020" },
+      ghost: { background: "#9681eb", border: "#000", color: "#000" },
+      fire: { background: "#fe0000", border: "#fff", color: "#fff" },
+      rock: { background: "#7d7463", border: "#fff", color: "#fff" },
+      psychic: { background: "#ff52a2", border: "#2b2a4c", color: "#2b2a4c" },
+      poison: { background: "#6528f7", border: "#fff", color: "#fff" },
+      fairy: { background: "#ffd0d0", border: "#202020", color: "#202020" },
+      flying: { background: "#b7b7b7", border: "#202020", color: "#202020" },
     };
 
     return typeColorMap[typeName];
@@ -73,15 +75,22 @@ function PokemonDetailPage() {
         <section className="pokemon-detail__info">
           <div>
             <h3 className="pokemon-detail__info-heading">Types</h3>
-            {pokemonDetail?.types.map((type) => (
-              <p
-                id="types"
-                className="pokemon-detail__info-text"
-                style={{ background: getTypeColor(type.type.name) }}
-              >
-                {type.type.name}
-              </p>
-            ))}
+            {pokemonDetail?.types.map((type) => {
+              const typeColors = getTypeColor(type.type.name);
+              return (
+                <p
+                  id="types"
+                  className="pokemon-detail__info-text"
+                  style={{
+                    background: typeColors.background,
+                    border: `3px solid ${typeColors.border}`,
+                    color: typeColors.color,
+                  }}
+                >
+                  {type.type.name}
+                </p>
+              );
+            })}
           </div>
           <span className="line"></span>
           <div>
