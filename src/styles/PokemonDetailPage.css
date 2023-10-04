@@ -109,6 +109,20 @@
   gap: 2rem;
 }
 
+.pokemon-detail__nearby-heading {
+  color: #b31312;
+  font-size: 4rem;
+  letter-spacing: 2px;
+  margin: 6rem 0 3rem;
+}
+
+.pokemon-detail__nearby {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
 @media screen and (min-width: 400px) {
   .pokemon-detail__img {
     min-height: 15vh;

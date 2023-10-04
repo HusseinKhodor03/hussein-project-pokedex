@@ -1,10 +1,33 @@
 import { useParams } from "react-router-dom";
 import usePokemonDetail from "../hooks/usePokemonDetail";
 import "../styles/PokemonDetailPage.css";
+import usePokemon from "../hooks/usePokemon";
+import usePokemonDetails from "../hooks/usePokemonDetails";
+import PokemonCard from "../components/PokemonCard";
 
 function PokemonDetailPage() {
   const { name } = useParams();
   const { data: pokemonDetail } = usePokemonDetail(name!);
+
+  const pokemonID = pokemonDetail?.id;
+  const names: string[] = [];
+
+  function calcOffset(id: number) {
+    let offset: number;
+
+    if (id < 6) {
+      offset = id;
+    } else {
+      offset = id - 6;
+    }
+    return offset;
+  }
+
+  const offset = calcOffset(pokemonID!);
+  const { data: pokemon } = usePokemon(offset, 5);
+
+  pokemon?.results.forEach((pokemon) => names.push(pokemon.name));
+  const { data: nearbyPokemon } = usePokemonDetails(names);
 
   function getTypeColor(typeName: string) {
     const typeColorMap: { [type: string]: string } = {
@@ -64,10 +87,10 @@ function PokemonDetailPage() {
           <div>
             <h3 className="pokemon-detail__info-heading">Measurements</h3>
             <p className="pokemon-detail__info-text">
-              Weight: {pokemonDetail?.weight}
+              Weight: {pokemonDetail?.weight && pokemonDetail.weight / 10} kg
             </p>
             <p className="pokemon-detail__info-text">
-              Height: {pokemonDetail?.height}
+              Height: {pokemonDetail?.height && pokemonDetail.height / 10} m
             </p>
           </div>
           <span className="line"></span>
@@ -88,6 +111,14 @@ function PokemonDetailPage() {
             <p className="pokemon-detail__stats-text">{stat.stat.name}</p>
             <p className="pokemon-detail__stats-stat">{stat.base_stat}</p>
           </div>
+        ))}
+      </section>
+      <h3 className="pokemon-detail__nearby-heading">
+        Nearby Pokémon in the Pokédex
+      </h3>
+      <section className="pokemon-detail__nearby">
+        {nearbyPokemon?.map((pokemon) => (
+          <PokemonCard key={pokemon.id} pokemon={pokemon} />
         ))}
       </section>
     </section>
