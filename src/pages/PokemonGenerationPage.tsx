@@ -27,7 +27,7 @@ function PokemonGenerationPage() {
 
   ids.sort((a, b) => parseInt(a) - parseInt(b));
 
-  const { data: pokemonDetails } = usePokemonDetails(ids);
+  const { data: pokemonDetails } = usePokemonDetails(ids, 0);
 
   const [displayedPokemon, setDisplayedPokemon] = useState<PokemonDetails[]>(
     []

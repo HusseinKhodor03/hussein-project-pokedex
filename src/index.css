@@ -21,6 +21,8 @@ body {
   font-size: 1.8rem;
   color: #fff;
   margin: 0;
+  background: url("/src/assets/background-image.webp") no-repeat center center
+    fixed;
 }
 
 h1,

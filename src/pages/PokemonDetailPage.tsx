@@ -6,6 +6,31 @@ function PokemonDetailPage() {
   const { name } = useParams();
   const { data: pokemonDetail } = usePokemonDetail(name!);
 
+  function getTypeColor(typeName: string) {
+    const typeColorMap: { [type: string]: string } = {
+      water: "#4e4feb",
+      grass: "#1a5d1a",
+      fighting: "#8c3333",
+      bug: "#b5c99a",
+      steel: "#ffeaea",
+      dragon: "#164b60",
+      ice: "#c5dff8",
+      electric: "#f1c93b",
+      dark: "#000",
+      normal: "#eee",
+      ground: "#e9b384",
+      ghost: "#9681eb",
+      fire: "#fe0000",
+      rock: "#7d7463",
+      psychic: "#ff52a2",
+      poison: "#6528f7",
+      fairy: "#ffd0d0",
+      flying: "#b7b7b7",
+    };
+
+    return typeColorMap[typeName];
+  }
+
   return (
     <section className="container pokemon-detail">
       <h2 className="pokemon-detail__heading">
@@ -26,7 +51,13 @@ function PokemonDetailPage() {
           <div>
             <h3 className="pokemon-detail__info-heading">Types</h3>
             {pokemonDetail?.types.map((type) => (
-              <p className="pokemon-detail__info-text">{type.type.name}</p>
+              <p
+                id="types"
+                className="pokemon-detail__info-text"
+                style={{ background: getTypeColor(type.type.name) }}
+              >
+                {type.type.name}
+              </p>
             ))}
           </div>
           <span className="line"></span>
@@ -52,54 +83,12 @@ function PokemonDetailPage() {
       </div>
       <h3 className="pokemon-detail__stats-heading">Stats</h3>
       <section className="pokemon-detail__stats">
-        <div>
-          <p className="pokemon-detail__stats-text">
-            {pokemonDetail?.stats[0].stat.name}
-          </p>
-          <p className="pokemon-detail__stats-stat">
-            {pokemonDetail?.stats[0].base_stat}
-          </p>
-        </div>
-        <div>
-          <p className="pokemon-detail__stats-text">
-            {pokemonDetail?.stats[1].stat.name}
-          </p>
-          <p className="pokemon-detail__stats-stat">
-            {pokemonDetail?.stats[1].base_stat}
-          </p>
-        </div>
-        <div>
-          <p className="pokemon-detail__stats-text">
-            {pokemonDetail?.stats[2].stat.name}
-          </p>
-          <p className="pokemon-detail__stats-stat">
-            {pokemonDetail?.stats[2].base_stat}
-          </p>
-        </div>
-        <div>
-          <p className="pokemon-detail__stats-text">
-            {pokemonDetail?.stats[3].stat.name}
-          </p>
-          <p className="pokemon-detail__stats-stat">
-            {pokemonDetail?.stats[3].base_stat}
-          </p>
-        </div>
-        <div>
-          <p className="pokemon-detail__stats-text">
-            {pokemonDetail?.stats[4].stat.name}
-          </p>
-          <p className="pokemon-detail__stats-stat">
-            {pokemonDetail?.stats[4].base_stat}
-          </p>
-        </div>
-        <div>
-          <p className="pokemon-detail__stats-text">
-            {pokemonDetail?.stats[5].stat.name}
-          </p>
-          <p className="pokemon-detail__stats-stat">
-            {pokemonDetail?.stats[5].base_stat}
-          </p>
-        </div>
+        {pokemonDetail?.stats.map((stat, index) => (
+          <div key={index}>
+            <p className="pokemon-detail__stats-text">{stat.stat.name}</p>
+            <p className="pokemon-detail__stats-stat">{stat.base_stat}</p>
+          </div>
+        ))}
       </section>
     </section>
   );

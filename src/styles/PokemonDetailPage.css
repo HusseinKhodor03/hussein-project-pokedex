@@ -21,7 +21,7 @@
 .pokemon-detail__img-container {
   background: linear-gradient(45deg, #a2a297, #eee);
   border: 5px solid #202020;
-  border-radius: 1.75rem;
+  border-radius: 2.5rem;
   display: flex;
   justify-content: center;
   gap: 2rem;
@@ -37,7 +37,7 @@
   background: #b31312;
   display: flex;
   border: 5px solid #202020;
-  border-radius: 1.75rem;
+  border-radius: 2.5rem;
   padding: 2vh 3vw;
   gap: 3rem;
   flex-direction: column;
@@ -64,6 +64,18 @@
   width: 5px;
   height: auto;
   display: none;
+}
+
+#types {
+  padding: 0.35rem 1.35rem;
+  border-radius: 1.6rem;
+  border: 3px solid #fff;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+#types:hover {
+  transform: scale(1.05);
 }
 
 .pokemon-detail__stats-heading {
@@ -95,6 +107,13 @@
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 2rem;
+}
+
+@media screen and (min-width: 400px) {
+  .pokemon-detail__img {
+    min-height: 15vh;
+    min-width: 15vw;
+  }
 }
 
 @media screen and (min-width: 627px) {
