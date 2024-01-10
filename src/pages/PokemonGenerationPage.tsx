@@ -5,12 +5,13 @@ import usePokemonDetails from "../hooks/usePokemonDetails";
 import PokemonDetails from "../entities/PokemonDetails";
 import PokemonCard from "../components/PokemonCard";
 import "../styles/PokemonGenerationPage.css";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function PokemonGenerationPage() {
   const pageSize = 15;
   const { name } = useParams();
   const [page, setPage] = useState<number>(1);
-  const { data: generation } = useGeneration(name!);
+  const { data: generation, isLoading } = useGeneration(name!);
 
   const urls: string[] = [];
 
@@ -52,6 +53,9 @@ function PokemonGenerationPage() {
   return (
     <section className="container pokemon-gen">
       <h2 className="pokemon-gen__heading">{name} Pokémon</h2>
+
+      {isLoading && <LoadingSpinner />}
+
       <div className="pokemon-gen__cards">
         {displayedPokemon.map((pokemonName, index) => (
           <PokemonCard key={index} pokemon={pokemonName} />
