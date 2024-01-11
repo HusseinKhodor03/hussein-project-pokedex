@@ -8,7 +8,11 @@ import LoadingSpinner from "../components/LoadingSpinner";
 
 function PokemonDetailPage() {
   const { name } = useParams();
-  const { data: pokemonDetail, isLoading: detail } = usePokemonDetail(name!);
+  const {
+    data: pokemonDetail,
+    isLoading: detail,
+    isError,
+  } = usePokemonDetail(name!);
 
   const pokemonID = pokemonDetail?.id;
   const names: string[] = [];
@@ -57,6 +61,7 @@ function PokemonDetailPage() {
     return typeColorMap[typeName];
   }
 
+  if (isError) throw new Error();
   if (detail) return <LoadingSpinner />;
 
   return (

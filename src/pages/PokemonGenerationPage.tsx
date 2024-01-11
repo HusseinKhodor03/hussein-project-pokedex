@@ -11,7 +11,7 @@ function PokemonGenerationPage() {
   const pageSize = 15;
   const { name } = useParams();
   const [page, setPage] = useState<number>(1);
-  const { data: generation, isLoading } = useGeneration(name!);
+  const { data: generation, isLoading, isError } = useGeneration(name!);
 
   const urls: string[] = [];
 
@@ -50,12 +50,12 @@ function PokemonGenerationPage() {
     setPage((prevPage) => prevPage + 1);
   };
 
+  if (isError) throw new Error();
+  if (isLoading) return <LoadingSpinner />;
+
   return (
     <section className="container pokemon-gen">
       <h2 className="pokemon-gen__heading">{name} Pokémon</h2>
-
-      {isLoading && <LoadingSpinner />}
-
       <div className="pokemon-gen__cards">
         {displayedPokemon.map((pokemonName, index) => (
           <PokemonCard key={index} pokemon={pokemonName} />

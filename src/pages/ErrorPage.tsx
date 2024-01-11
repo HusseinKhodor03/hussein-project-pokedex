@@ -1,7 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
-import MenuBar from "../components/MenuBar";
-import NavigationBar from "../components/NavigationBar";
 import "../styles/ErrorPage.css";
 
 function ErrorPage() {
@@ -9,8 +6,6 @@ function ErrorPage() {
 
   return (
     <>
-      <NavigationBar />
-      <MenuBar />
       <section className="error">
         <h2 className="error__heading">Oops! An error occurred...</h2>
         <div className="error__image"></div>
@@ -21,7 +16,6 @@ function ErrorPage() {
           Return to Home Page
         </button>
       </section>
-      <Footer />
     </>
   );
 }
