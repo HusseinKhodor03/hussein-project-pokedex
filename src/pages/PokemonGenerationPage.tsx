@@ -35,6 +35,11 @@ function PokemonGenerationPage() {
   );
 
   useEffect(() => {
+    setPage(1);
+    setDisplayedPokemon([]);
+  }, [name]);
+
+  useEffect(() => {
     if (pokemonDetails) {
       const startIndex = (page - 1) * pageSize;
       const endIndex = startIndex + pageSize;

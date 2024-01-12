@@ -3,8 +3,11 @@ import "../styles/MenuBar.css";
 import useGenerations from "../hooks/useGenerations";
 import useTypes from "../hooks/useTypes";
 import useRegions from "../hooks/useRegions";
+import { useNavigate } from "react-router-dom";
 
 function MenuBar() {
+  const navigate = useNavigate();
+
   const [isGenerationsVisible, setGenerationsVisible] = useState(false);
   const [isTypesVisible, setTypesVisible] = useState(false);
   const [isRegionsVisible, setRegionsVisible] = useState(false);
@@ -62,7 +65,14 @@ function MenuBar() {
             >
               <ul className="list">
                 {generations?.results.map((generation) => (
-                  <li className="list__item" key={generation.name}>
+                  <li
+                    className="list__item"
+                    key={generation.name}
+                    onClick={() => {
+                      navigate(`/generation/${generation.name}`);
+                      setGenerationsVisible(false);
+                    }}
+                  >
                     {generation.name}
                   </li>
                 ))}
