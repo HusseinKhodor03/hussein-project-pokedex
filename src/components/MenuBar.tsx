@@ -49,7 +49,8 @@ function MenuBar() {
             <div className="dropdown__link">
               <a
                 href="#"
-                onClick={() => {
+                onClick={(event) => {
+                  event.preventDefault();
                   closeAllDropdowns();
                   setGenerationsVisible(!isGenerationsVisible);
                 }}
@@ -85,7 +86,8 @@ function MenuBar() {
             <div className="dropdown__link">
               <a
                 href="#"
-                onClick={() => {
+                onClick={(event) => {
+                  event.preventDefault();
                   closeAllDropdowns();
                   setTypesVisible(!isTypesVisible);
                 }}
@@ -99,7 +101,14 @@ function MenuBar() {
             >
               <ul className="list">
                 {types?.results.map((type) => (
-                  <li className="list__item" key={type.name}>
+                  <li
+                    className="list__item"
+                    key={type.name}
+                    onClick={() => {
+                      navigate(`/type/${type.name}`);
+                      setTypesVisible(false);
+                    }}
+                  >
                     {type.name}
                   </li>
                 ))}
@@ -112,7 +121,8 @@ function MenuBar() {
             <div className="dropdown__link">
               <a
                 href="#"
-                onClick={() => {
+                onClick={(event) => {
+                  event.preventDefault();
                   closeAllDropdowns();
                   setRegionsVisible(!isRegionsVisible);
                 }}

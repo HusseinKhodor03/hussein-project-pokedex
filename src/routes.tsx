@@ -5,6 +5,7 @@ import PokemonGenerationPage from "./pages/PokemonGenerationPage";
 import ErrorPage from "./pages/ErrorPage";
 import PokemonDetailPage from "./pages/PokemonDetailPage";
 import HomePageError from "./pages/HomePageError";
+import PokemonTypePage from "./pages/PokemonTypePage";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
       {
         path: "pokemon/:name",
         element: <PokemonDetailPage />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "type/:name",
+        element: <PokemonTypePage />,
         errorElement: <ErrorPage />,
       },
     ],

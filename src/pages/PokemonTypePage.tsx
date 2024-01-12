@@ -1,22 +1,21 @@
 import { useParams } from "react-router-dom";
-import useGeneration from "../hooks/useGeneration";
+import useType from "../hooks/useType";
 import { useEffect, useState } from "react";
 import usePokemonDetails from "../hooks/usePokemonDetails";
 import PokemonDetails from "../entities/PokemonDetails";
-import PokemonCard from "../components/PokemonCard";
-import "../styles/PokemonGenerationPage.css";
 import LoadingSpinner from "../components/LoadingSpinner";
+import PokemonCard from "../components/PokemonCard";
 
-function PokemonGenerationPage() {
+function PokemonTypePage() {
   const pageSize = 15;
   const { name } = useParams();
   const [page, setPage] = useState<number>(1);
-  const { data: generation, isLoading, isError } = useGeneration(name!);
+  const { data: pokemon, isLoading, isError } = useType(name!);
 
   const urls: string[] = [];
 
-  generation?.pokemon_species.forEach((pokemon) => {
-    urls.push(pokemon.url);
+  pokemon?.pokemon.forEach((pokemon) => {
+    urls.push(pokemon.pokemon.url);
   });
 
   const ids: string[] = [];
@@ -25,8 +24,6 @@ function PokemonGenerationPage() {
     const parts = url.split("/");
     ids.push(parts[parts.length - 2]);
   });
-
-  ids.sort((a, b) => parseInt(a) - parseInt(b));
 
   const { data: pokemonDetails } = usePokemonDetails(ids, 0);
 
@@ -60,7 +57,7 @@ function PokemonGenerationPage() {
 
   return (
     <section className="container pokemon-gen">
-      <h2 className="pokemon-gen__heading">{name} Pokémon</h2>
+      <h2 className="pokemon-gen__heading">{name} Type Pokémon</h2>
       <div className="pokemon-gen__cards">
         {displayedPokemon.map((pokemonName, index) => (
           <PokemonCard key={index} pokemon={pokemonName} />
@@ -77,4 +74,4 @@ function PokemonGenerationPage() {
   );
 }
 
-export default PokemonGenerationPage;
+export default PokemonTypePage;
