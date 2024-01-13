@@ -11,7 +11,11 @@ function PokemonGenerationPage() {
   const pageSize = 15;
   const { name } = useParams();
   const [page, setPage] = useState<number>(1);
-  const { data: generation, isLoading, isError } = useGeneration(name!);
+  const {
+    data: generation,
+    isLoading: isGenerationLoading,
+    isError: isGenerationError,
+  } = useGeneration(name!);
 
   const urls: string[] = [];
 
@@ -28,7 +32,11 @@ function PokemonGenerationPage() {
 
   ids.sort((a, b) => parseInt(a) - parseInt(b));
 
-  const { data: pokemonDetails } = usePokemonDetails(ids, 0);
+  const {
+    data: pokemonDetails,
+    isLoading: isPokemonDetailsLoading,
+    isError: isPokemonDetailsError,
+  } = usePokemonDetails(ids, 0);
 
   const [displayedPokemon, setDisplayedPokemon] = useState<PokemonDetails[]>(
     []
@@ -55,8 +63,9 @@ function PokemonGenerationPage() {
     setPage((prevPage) => prevPage + 1);
   };
 
-  if (isError || !isNaN(parseInt(name!))) throw new Error();
-  if (isLoading) return <LoadingSpinner />;
+  if (isGenerationError || isPokemonDetailsError || !isNaN(parseInt(name!)))
+    throw new Error();
+  if (isGenerationLoading || isPokemonDetailsLoading) return <LoadingSpinner />;
 
   return (
     <section className="container pokemon-gen">

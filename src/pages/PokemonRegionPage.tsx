@@ -11,8 +11,16 @@ function PokemonRegionPage() {
   const pageSize = 15;
   const { name } = useParams();
   const [page, setPage] = useState<number>(1);
-  const { data: region, isLoading, isError } = useRegion(name!);
-  const { data: generation } = useGeneration(region?.main_generation?.name!);
+  const {
+    data: region,
+    isLoading: isRegionLoading,
+    isError: isRegionError,
+  } = useRegion(name!);
+  const {
+    data: generation,
+    isLoading: isGenerationLoading,
+    isError: isGenerationError,
+  } = useGeneration(region?.main_generation?.name!);
 
   const urls: string[] = [];
 
@@ -29,7 +37,11 @@ function PokemonRegionPage() {
 
   ids.sort((a, b) => parseInt(a) - parseInt(b));
 
-  const { data: pokemonDetails } = usePokemonDetails(ids, 0);
+  const {
+    data: pokemonDetails,
+    isLoading: isPokemonDetailsLoading,
+    isError: isPokemonDetailsError,
+  } = usePokemonDetails(ids, 0);
 
   const [displayedPokemon, setDisplayedPokemon] = useState<PokemonDetails[]>(
     []
@@ -56,8 +68,15 @@ function PokemonRegionPage() {
     setPage((prevPage) => prevPage + 1);
   };
 
-  if (isError || !isNaN(parseInt(name!))) throw new Error();
-  if (isLoading) return <LoadingSpinner />;
+  if (
+    isRegionError ||
+    isGenerationError ||
+    isPokemonDetailsError ||
+    !isNaN(parseInt(name!))
+  )
+    throw new Error();
+  if (isRegionLoading || isGenerationLoading || isPokemonDetailsLoading)
+    return <LoadingSpinner />;
 
   return (
     <section className="container pokemon-gen">

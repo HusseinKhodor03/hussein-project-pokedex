@@ -10,7 +10,11 @@ function PokemonTypePage() {
   const pageSize = 15;
   const { name } = useParams();
   const [page, setPage] = useState<number>(1);
-  const { data: pokemon, isLoading, isError } = useType(name!);
+  const {
+    data: pokemon,
+    isLoading: isTypeLoading,
+    isError: isTypeError,
+  } = useType(name!);
 
   const urls: string[] = [];
 
@@ -25,7 +29,11 @@ function PokemonTypePage() {
     ids.push(parts[parts.length - 2]);
   });
 
-  const { data: pokemonDetails } = usePokemonDetails(ids, 0);
+  const {
+    data: pokemonDetails,
+    isLoading: isPokemonDetailsLoading,
+    isError: isPokemonDetailsError,
+  } = usePokemonDetails(ids, 0);
 
   const [displayedPokemon, setDisplayedPokemon] = useState<PokemonDetails[]>(
     []
@@ -52,8 +60,9 @@ function PokemonTypePage() {
     setPage((prevPage) => prevPage + 1);
   };
 
-  if (isError || !isNaN(parseInt(name!))) throw new Error();
-  if (isLoading) return <LoadingSpinner />;
+  if (isTypeError || isPokemonDetailsError || !isNaN(parseInt(name!)))
+    throw new Error();
+  if (isTypeLoading || isPokemonDetailsLoading) return <LoadingSpinner />;
 
   return (
     <section className="container pokemon-gen">
