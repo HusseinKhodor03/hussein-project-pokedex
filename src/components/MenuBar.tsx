@@ -16,6 +16,10 @@ function MenuBar() {
   const { data: types } = useTypes();
   const { data: regions } = useRegions();
 
+  const filteredTypes = types?.results.filter(
+    (type) => type.name !== "shadow" && type.name !== "unknown"
+  );
+
   const filteredRegions = regions?.results.filter(
     (region) => region.name !== "hisui"
   );
@@ -104,7 +108,7 @@ function MenuBar() {
               className={`dropdown-menu ${isTypesVisible ? "visible" : ""}`}
             >
               <ul className="list">
-                {types?.results.map((type) => (
+                {filteredTypes?.map((type) => (
                   <li
                     className="list__item"
                     key={type.name}
