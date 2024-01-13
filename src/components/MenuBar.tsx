@@ -136,7 +136,14 @@ function MenuBar() {
             >
               <ul className="list">
                 {regions?.results.map((region) => (
-                  <li className="list__item" key={region.name}>
+                  <li
+                    className="list__item"
+                    key={region.name}
+                    onClick={() => {
+                      navigate(`/region/${region.name}`);
+                      setRegionsVisible(false);
+                    }}
+                  >
                     {region.name}
                   </li>
                 ))}
