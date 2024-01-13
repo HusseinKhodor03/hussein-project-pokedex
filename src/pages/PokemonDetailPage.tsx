@@ -10,8 +10,8 @@ function PokemonDetailPage() {
   const { name } = useParams();
   const {
     data: pokemonDetail,
-    isLoading: detail,
-    isError,
+    isLoading: isPokemonDetailLoading,
+    isError: isPokemonDetailError,
   } = usePokemonDetail(name!);
 
   const pokemonID = pokemonDetail?.id;
@@ -29,10 +29,18 @@ function PokemonDetailPage() {
   }
 
   const offset = calcOffset(pokemonID!);
-  const { data: pokemon } = usePokemon(offset, 5);
+  const {
+    data: pokemon,
+    isLoading: isPokemonLoading,
+    isError: isPokemonError,
+  } = usePokemon(offset, 5);
 
   pokemon?.results.forEach((pokemon) => names.push(pokemon.name));
-  const { data: nearbyPokemon, isLoading: nearby } = usePokemonDetails(names);
+  const {
+    data: nearbyPokemon,
+    isLoading: isNearbyLoading,
+    isError: isNearbyError,
+  } = usePokemonDetails(names);
 
   function getTypeColor(typeName: string) {
     const typeColorMap: {
@@ -61,8 +69,15 @@ function PokemonDetailPage() {
     return typeColorMap[typeName];
   }
 
-  if (isError) throw new Error();
-  if (detail) return <LoadingSpinner />;
+  if (
+    isPokemonDetailError ||
+    isPokemonError ||
+    isNearbyError ||
+    !isNaN(parseInt(name!))
+  )
+    throw new Error();
+  if (isPokemonDetailLoading || isPokemonLoading || isNearbyLoading)
+    return <LoadingSpinner />;
 
   return (
     <section className="container pokemon-detail">
@@ -133,9 +148,6 @@ function PokemonDetailPage() {
       <h3 className="pokemon-detail__nearby-heading">
         Nearby Pokémon in the Pokédex
       </h3>
-
-      {nearby && <LoadingSpinner />}
-
       <section className="pokemon-detail__nearby">
         {nearbyPokemon?.map((pokemon) => (
           <PokemonCard key={pokemon.id} pokemon={pokemon} />
