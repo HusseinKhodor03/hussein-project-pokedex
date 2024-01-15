@@ -52,7 +52,7 @@ function PokemonGrid() {
   return (
     <>
       {groupedPokemon.map((generationPokemon, index) => (
-        <div className="container pokemon-home">
+        <div key={index} className="container pokemon-home">
           <h2 className="pokemon-home__heading">{generationNames[index]}</h2>
           <div key={index} className="pokemon-home__generation">
             {generationPokemon.map((pokemon) => (

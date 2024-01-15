@@ -128,8 +128,8 @@ function PokemonDetailPage() {
           <span className="line"></span>
           <div>
             <h3 className="pokemon-detail__info-heading">Abilities</h3>
-            {pokemonDetail?.abilities.map((ability) => (
-              <p className="pokemon-detail__info-text">
+            {pokemonDetail?.abilities.map((ability, index) => (
+              <p key={index} className="pokemon-detail__info-text">
                 {ability.ability.name}
               </p>
             ))}
