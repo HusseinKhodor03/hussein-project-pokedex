@@ -5,6 +5,7 @@ import usePokemonDetails from "../hooks/usePokemonDetails";
 import PokemonDetails from "../entities/PokemonDetails";
 import LoadingSpinner from "../components/LoadingSpinner";
 import PokemonCard from "../components/PokemonCard";
+import useErrorStore from "../store";
 
 function PokemonTypePage() {
   const pageSize = 15;
@@ -29,11 +30,8 @@ function PokemonTypePage() {
     ids.push(parts[parts.length - 2]);
   });
 
-  const {
-    data: pokemonDetails,
-    isLoading: isPokemonDetailsLoading,
-    isError: isPokemonDetailsError,
-  } = usePokemonDetails(ids, 0);
+  const { data: pokemonDetails, isLoading: isPokemonDetailsLoading } =
+    usePokemonDetails(ids, 0);
 
   const [displayedPokemon, setDisplayedPokemon] = useState<PokemonDetails[]>(
     []
@@ -60,8 +58,14 @@ function PokemonTypePage() {
     setPage((prevPage) => prevPage + 1);
   };
 
-  if (isTypeError || isPokemonDetailsError || !isNaN(parseInt(name!)))
-    throw new Error();
+  const setTypeError = useErrorStore((selector) => selector.setTypeError);
+  const setNaNError = useErrorStore((selector) => selector.setNaNError);
+  const isNaNError = !isNaN(parseInt(name!));
+
+  setTypeError(isTypeError);
+  setNaNError(isNaNError);
+
+  if (isTypeError || isNaNError) throw new Error();
   if (isTypeLoading || isPokemonDetailsLoading) return <LoadingSpinner />;
 
   return (

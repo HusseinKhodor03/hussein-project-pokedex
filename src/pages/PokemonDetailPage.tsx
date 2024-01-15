@@ -5,6 +5,7 @@ import usePokemon from "../hooks/usePokemon";
 import usePokemonDetails from "../hooks/usePokemonDetails";
 import PokemonCard from "../components/PokemonCard";
 import LoadingSpinner from "../components/LoadingSpinner";
+import useErrorStore from "../store";
 
 function PokemonDetailPage() {
   const { name } = useParams();
@@ -29,18 +30,12 @@ function PokemonDetailPage() {
   }
 
   const offset = calcOffset(pokemonID!);
-  const {
-    data: pokemon,
-    isLoading: isPokemonLoading,
-    isError: isPokemonError,
-  } = usePokemon(offset, 5);
+  const { data: pokemon, isLoading: isPokemonLoading } = usePokemon(offset, 5);
 
   pokemon?.results.forEach((pokemon) => names.push(pokemon.name));
-  const {
-    data: nearbyPokemon,
-    isLoading: isNearbyLoading,
-    isError: isNearbyError,
-  } = usePokemonDetails(names);
+
+  const { data: nearbyPokemon, isLoading: isNearbyLoading } =
+    usePokemonDetails(names);
 
   function getTypeColor(typeName: string) {
     const typeColorMap: {
@@ -69,13 +64,17 @@ function PokemonDetailPage() {
     return typeColorMap[typeName];
   }
 
-  if (
-    isPokemonDetailError ||
-    isPokemonError ||
-    isNearbyError ||
-    !isNaN(parseInt(name!))
-  )
-    throw new Error();
+  const setPokemonDetailError = useErrorStore(
+    (selector) => selector.setPokemonDetailError
+  );
+  const setNaNError = useErrorStore((selector) => selector.setNaNError);
+  const isNaNError = !isNaN(parseInt(name!));
+
+  setPokemonDetailError(isPokemonDetailError);
+  setNaNError(isNaNError);
+
+  if (isPokemonDetailError || isNaNError) throw new Error();
+
   if (isPokemonDetailLoading || isPokemonLoading || isNearbyLoading)
     return <LoadingSpinner />;
 

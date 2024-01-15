@@ -6,6 +6,7 @@ import PokemonDetails from "../entities/PokemonDetails";
 import LoadingSpinner from "../components/LoadingSpinner";
 import PokemonCard from "../components/PokemonCard";
 import useGeneration from "../hooks/useGeneration";
+import useErrorStore from "../store";
 
 function PokemonRegionPage() {
   const pageSize = 15;
@@ -16,11 +17,10 @@ function PokemonRegionPage() {
     isLoading: isRegionLoading,
     isError: isRegionError,
   } = useRegion(name!);
-  const {
-    data: generation,
-    isLoading: isGenerationLoading,
-    isError: isGenerationError,
-  } = useGeneration(region?.main_generation?.name!);
+
+  const { data: generation, isLoading: isGenerationLoading } = useGeneration(
+    region?.main_generation?.name!
+  );
 
   const urls: string[] = [];
 
@@ -37,11 +37,8 @@ function PokemonRegionPage() {
 
   ids.sort((a, b) => parseInt(a) - parseInt(b));
 
-  const {
-    data: pokemonDetails,
-    isLoading: isPokemonDetailsLoading,
-    isError: isPokemonDetailsError,
-  } = usePokemonDetails(ids, 0);
+  const { data: pokemonDetails, isLoading: isPokemonDetailsLoading } =
+    usePokemonDetails(ids, 0);
 
   const [displayedPokemon, setDisplayedPokemon] = useState<PokemonDetails[]>(
     []
@@ -68,13 +65,14 @@ function PokemonRegionPage() {
     setPage((prevPage) => prevPage + 1);
   };
 
-  if (
-    isRegionError ||
-    isGenerationError ||
-    isPokemonDetailsError ||
-    !isNaN(parseInt(name!))
-  )
-    throw new Error();
+  const setRegionError = useErrorStore((selector) => selector.setRegionError);
+  const setNaNError = useErrorStore((selector) => selector.setNaNError);
+  const isNaNError = !isNaN(parseInt(name!));
+
+  setRegionError(isRegionError);
+  setNaNError(isNaNError);
+
+  if (isRegionError || isNaNError) throw new Error();
   if (isRegionLoading || isGenerationLoading || isPokemonDetailsLoading)
     return <LoadingSpinner />;
 

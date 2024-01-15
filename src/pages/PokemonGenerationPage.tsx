@@ -6,6 +6,7 @@ import PokemonDetails from "../entities/PokemonDetails";
 import PokemonCard from "../components/PokemonCard";
 import "../styles/PokemonGenerationPage.css";
 import LoadingSpinner from "../components/LoadingSpinner";
+import useErrorStore from "../store";
 
 function PokemonGenerationPage() {
   const pageSize = 15;
@@ -32,11 +33,8 @@ function PokemonGenerationPage() {
 
   ids.sort((a, b) => parseInt(a) - parseInt(b));
 
-  const {
-    data: pokemonDetails,
-    isLoading: isPokemonDetailsLoading,
-    isError: isPokemonDetailsError,
-  } = usePokemonDetails(ids, 0);
+  const { data: pokemonDetails, isLoading: isPokemonDetailsLoading } =
+    usePokemonDetails(ids, 0);
 
   const [displayedPokemon, setDisplayedPokemon] = useState<PokemonDetails[]>(
     []
@@ -63,8 +61,16 @@ function PokemonGenerationPage() {
     setPage((prevPage) => prevPage + 1);
   };
 
-  if (isGenerationError || isPokemonDetailsError || !isNaN(parseInt(name!)))
-    throw new Error();
+  const setGenerationError = useErrorStore(
+    (selector) => selector.setGenerationError
+  );
+  const setNaNError = useErrorStore((selector) => selector.setNaNError);
+  const isNaNError = !isNaN(parseInt(name!));
+
+  setGenerationError(isGenerationError);
+  setNaNError(isNaNError);
+
+  if (isGenerationError || isNaNError) throw new Error();
   if (isGenerationLoading || isPokemonDetailsLoading) return <LoadingSpinner />;
 
   return (
