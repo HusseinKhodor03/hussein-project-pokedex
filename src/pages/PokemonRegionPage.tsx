@@ -68,11 +68,14 @@ function PokemonRegionPage() {
   const setRegionError = useErrorStore((selector) => selector.setRegionError);
   const setNaNError = useErrorStore((selector) => selector.setNaNError);
   const isNaNError = !isNaN(parseInt(name!));
+  const isNullError = region?.main_generation === null;
 
-  setRegionError(isRegionError);
+  if (isNullError) setRegionError(true);
+  else setRegionError(isRegionError);
+
   setNaNError(isNaNError);
 
-  if (isRegionError || isNaNError) throw new Error();
+  if (isRegionError || isNaNError || isNullError) throw new Error();
   if (isRegionLoading || isGenerationLoading || isPokemonDetailsLoading)
     return <LoadingSpinner />;
 

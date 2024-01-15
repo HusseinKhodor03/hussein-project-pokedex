@@ -61,11 +61,14 @@ function PokemonTypePage() {
   const setTypeError = useErrorStore((selector) => selector.setTypeError);
   const setNaNError = useErrorStore((selector) => selector.setNaNError);
   const isNaNError = !isNaN(parseInt(name!));
+  const isEmptyArrayError = pokemon?.pokemon.length === 0;
 
-  setTypeError(isTypeError);
+  if (isEmptyArrayError) setTypeError(true);
+  else setTypeError(isTypeError);
+
   setNaNError(isNaNError);
 
-  if (isTypeError || isNaNError) throw new Error();
+  if (isTypeError || isNaNError || isEmptyArrayError) throw new Error();
   if (isTypeLoading || isPokemonDetailsLoading) return <LoadingSpinner />;
 
   return (

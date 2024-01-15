@@ -20,8 +20,6 @@ function ErrorPage() {
     isNaNError,
   } = useErrorStore();
 
-  console.log(error);
-
   if (isPokemonDetailError) errorText = `The Pokémon "${name}" was not found.`;
   else if (isGenerationError)
     errorText = `No Pokémon was found in the "${name}" generation.`;
