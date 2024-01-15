@@ -4,18 +4,34 @@
   width: 100%;
   background-size: cover;
   background-position: center;
-  height: 500px;
+  height: 320px;
 }
 
 .banner h3 {
   color: #000;
+  font-size: 2.2rem;
   margin: 0;
 }
 
 .banner h1 {
+  font-size: 3.2rem;
   margin: 0 0 3rem;
 }
 
 .banner__content {
   padding: 5rem 3rem 0;
+}
+
+@media screen and (min-width: 768px) {
+  .banner {
+    height: 400px;
+  }
+
+  .banner h1 {
+    font-size: 6rem;
+  }
+
+  .banner h3 {
+    font-size: 3.2rem;
+  }
 }
