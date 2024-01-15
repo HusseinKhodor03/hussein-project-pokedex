@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import usePokemonDetail from "../hooks/usePokemonDetail";
 import "../styles/PokemonDetailPage.css";
 import usePokemon from "../hooks/usePokemon";
@@ -9,6 +9,7 @@ import useErrorStore from "../store";
 
 function PokemonDetailPage() {
   const { name } = useParams();
+  const navigate = useNavigate();
   const {
     data: pokemonDetail,
     isLoading: isPokemonDetailLoading,
@@ -108,6 +109,7 @@ function PokemonDetailPage() {
                     border: `3px solid ${typeColors.border}`,
                     color: typeColors.color,
                   }}
+                  onClick={() => navigate(`/type/${type.type.name}`)}
                 >
                   {type.type.name}
                 </p>
