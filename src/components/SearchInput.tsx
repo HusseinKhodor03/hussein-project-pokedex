@@ -11,8 +11,8 @@ function SearchInput() {
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        if (ref.current) {
-          navigate(`/pokemon/${ref.current.value.toLowerCase()}`);
+        if (ref.current?.value && ref.current.value.trim() !== "") {
+          navigate(`/pokemon/${ref.current.value.toLowerCase().trim()}`);
           ref.current.value = "";
           ref.current.blur();
         }
