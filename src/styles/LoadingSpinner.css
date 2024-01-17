@@ -24,6 +24,29 @@
   animation: loading 1s linear infinite;
 }
 
+.loader-title::after {
+  content: "";
+  animation: ellipsis 1.5s infinite;
+}
+
+@keyframes ellipsis {
+  0% {
+    content: ".";
+  }
+  25% {
+    content: "..";
+  }
+  50% {
+    content: "...";
+  }
+  75% {
+    content: "";
+  }
+  100% {
+    content: ".";
+  }
+}
+
 @keyframes loading {
   from {
     transform: rotate(0deg);
