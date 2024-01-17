@@ -19,11 +19,32 @@ function PokemonDetailPage() {
   const pokemonID = pokemonDetail?.id;
   const names: string[] = [];
 
+  const { data: allPokemon } = usePokemon(0, 100000);
+
+  const urls: string[] = [];
+
+  allPokemon?.results.forEach((pokemon) => {
+    urls.push(pokemon.url);
+  });
+
+  const ids: string[] = [];
+
+  urls.forEach((url) => {
+    const parts = url.split("/");
+    ids.push(parts[parts.length - 2]);
+  });
+
+  const lastFivePokemon = ids.slice(-5).map((id) => parseInt(id));
+
   function calcOffset(id: number) {
     let offset: number;
 
     if (id < 6) {
       offset = id;
+    } else if (lastFivePokemon.includes(id)) {
+      offset = id - 8981;
+    } else if (id > 10000) {
+      offset = id - 8975;
     } else {
       offset = id - 6;
     }

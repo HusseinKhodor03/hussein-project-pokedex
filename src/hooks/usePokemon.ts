@@ -6,7 +6,7 @@ function usePokemon(offset: number, limit: number) {
   const pokemonService = new APIClient<Pokemon>("/pokemon/");
 
   return useQuery({
-    queryKey: ["pokemon", offset],
+    queryKey: ["pokemon", offset, limit],
     queryFn: () =>
       pokemonService.getAll({
         params: {
