@@ -30,36 +30,42 @@ function MenuBar() {
     setRegionsVisible(false);
   };
 
-  const menuRef = useRef<HTMLUListElement>(null);
+  const generationsRef = useRef<HTMLLIElement>(null);
+  const typesRef = useRef<HTMLLIElement>(null);
+  const regionsRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target as HTMLUListElement)
-      ) {
-        closeAllDropdowns();
+      if (!generationsRef.current?.contains(event.target as HTMLLIElement)) {
+        setGenerationsVisible(false);
+      }
+
+      if (!typesRef.current?.contains(event.target as HTMLLIElement)) {
+        setTypesVisible(false);
+      }
+
+      if (!regionsRef.current?.contains(event.target as HTMLLIElement)) {
+        setRegionsVisible(false);
       }
     };
 
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("click", handleOutsideClick);
 
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("click", handleOutsideClick);
     };
-  }, []);
+  });
 
   return (
     <section className="menu">
-      <ul className="container list menu__list" ref={menuRef}>
-        <li>
+      <ul className="container list menu__list">
+        <li ref={generationsRef}>
           <div className="dropdown">
             <div className="dropdown__link">
               <a
                 href="#"
                 onClick={(event) => {
                   event.preventDefault();
-                  closeAllDropdowns();
                   setGenerationsVisible(!isGenerationsVisible);
                 }}
               >
@@ -89,7 +95,7 @@ function MenuBar() {
             </div>
           </div>
         </li>
-        <li>
+        <li ref={typesRef}>
           <div className="dropdown">
             <div className="dropdown__link">
               <a
@@ -124,7 +130,7 @@ function MenuBar() {
             </div>
           </div>
         </li>
-        <li>
+        <li ref={regionsRef}>
           <div className="dropdown">
             <div className="dropdown__link">
               <a
