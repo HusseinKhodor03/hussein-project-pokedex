@@ -7,11 +7,17 @@ import PokemonDetailPage from "./pages/PokemonDetailPage";
 import HomePageError from "./pages/HomePageError";
 import PokemonTypePage from "./pages/PokemonTypePage";
 import PokemonRegionPage from "./pages/PokemonRegionPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <>
+        <Layout />
+        <ScrollToTop />
+      </>
+    ),
     errorElement: <HomePageError />,
     children: [
       { index: true, element: <HomePage /> },
