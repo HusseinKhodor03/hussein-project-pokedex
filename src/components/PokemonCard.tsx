@@ -24,7 +24,9 @@ function PokemonCard({ pokemon }: PokemonCardProps) {
         ) : (
           <p className="pokemon-card__no-image">No sprite available</p>
         )}
-        <h3 className="pokemon-card__heading">{pokemon.name}</h3>
+        <h3 className="pokemon-card__heading">
+          {pokemon.name.replace(/-/g, " ")}
+        </h3>
       </div>
     </>
   );

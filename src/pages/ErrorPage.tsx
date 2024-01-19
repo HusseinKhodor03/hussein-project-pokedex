@@ -10,7 +10,10 @@ import useErrorStore from "../store";
 function ErrorPage() {
   const navigate = useNavigate();
   const error = useRouteError();
-  const { name } = useParams();
+  const { name: name } = useParams();
+
+  const formattedName = name?.replace(/-/g, " ");
+
   let errorText: string = "";
   const {
     isPokemonDetailError,
@@ -20,14 +23,16 @@ function ErrorPage() {
     isNaNError,
   } = useErrorStore();
 
-  if (isPokemonDetailError) errorText = `The Pokémon "${name}" was not found.`;
+  if (isPokemonDetailError)
+    errorText = `The Pokémon "${formattedName}" was not found.`;
   else if (isGenerationError)
-    errorText = `No Pokémon was found in the "${name}" generation.`;
+    errorText = `No Pokémon was found in the "${formattedName}" generation.`;
   else if (isTypeError)
-    errorText = `No Pokémon was found for the "${name}" type.`;
+    errorText = `No Pokémon was found for the "${formattedName}" type.`;
   else if (isRegionError)
-    errorText = `No Pokémon was found in the "${name}" region.`;
-  else if (isNaNError) errorText = `The filter "${name}" is not valid.`;
+    errorText = `No Pokémon was found in the "${formattedName}" region.`;
+  else if (isNaNError)
+    errorText = `The filter "${formattedName}" is not valid.`;
   else if (isRouteErrorResponse(error)) {
     const startIndex = error.error?.message.indexOf('"');
     const endIndex = error.error?.message.indexOf('"', startIndex! + 1);

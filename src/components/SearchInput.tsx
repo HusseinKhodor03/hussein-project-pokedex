@@ -12,7 +12,12 @@ function SearchInput() {
       onSubmit={(event) => {
         event.preventDefault();
         if (ref.current?.value && ref.current.value.trim() !== "") {
-          navigate(`/pokemon/${ref.current.value.toLowerCase().trim()}`);
+          navigate(
+            `/pokemon/${ref.current.value
+              .toLowerCase()
+              .trim()
+              .replace(/\s+/g, "-")}`
+          );
           ref.current.value = "";
           ref.current.blur();
         }

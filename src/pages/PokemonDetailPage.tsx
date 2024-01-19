@@ -103,7 +103,7 @@ function PokemonDetailPage() {
   return (
     <section className="container pokemon-detail">
       <h2 className="pokemon-detail__heading">
-        # {pokemonDetail?.id} - {pokemonDetail?.name}
+        # {pokemonDetail?.id} - {pokemonDetail?.name.replace(/-/g, " ")}
       </h2>
       <div className="pokemon-detail__imginfo-container">
         <section className="pokemon-detail__img-container">
@@ -125,10 +125,11 @@ function PokemonDetailPage() {
         <section className="pokemon-detail__info">
           <div>
             <h3 className="pokemon-detail__info-heading">Types</h3>
-            {pokemonDetail?.types.map((type) => {
+            {pokemonDetail?.types.map((type, index) => {
               const typeColors = getTypeColor(type.type.name);
               return (
                 <p
+                  key={index}
                   id="types"
                   className="pokemon-detail__info-text"
                   style={{
@@ -158,7 +159,7 @@ function PokemonDetailPage() {
             <h3 className="pokemon-detail__info-heading">Abilities</h3>
             {pokemonDetail?.abilities.map((ability, index) => (
               <p key={index} className="pokemon-detail__info-text">
-                {ability.ability.name}
+                {ability.ability.name.replace(/-/g, " ")}
               </p>
             ))}
           </div>
@@ -168,7 +169,9 @@ function PokemonDetailPage() {
       <section className="pokemon-detail__stats">
         {pokemonDetail?.stats.map((stat, index) => (
           <div key={index}>
-            <p className="pokemon-detail__stats-text">{stat.stat.name}</p>
+            <p className="pokemon-detail__stats-text">
+              {stat.stat.name.replace(/-/g, " ")}
+            </p>
             <p className="pokemon-detail__stats-stat">{stat.base_stat}</p>
           </div>
         ))}
