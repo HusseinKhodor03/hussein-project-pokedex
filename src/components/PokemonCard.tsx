@@ -16,10 +16,14 @@ function PokemonCard({ pokemon }: PokemonCardProps) {
         className="pokemon-card"
         onClick={() => navigate(`/pokemon/${pokemon.name}`)}
       >
-        <img
-          src={pokemon.sprites.front_default}
-          className="pokemon-card__image"
-        />
+        {pokemon.sprites.front_default ? (
+          <img
+            src={pokemon.sprites.front_default}
+            className="pokemon-card__image"
+          />
+        ) : (
+          <p className="pokemon-card__no-image">No sprite available</p>
+        )}
         <h3 className="pokemon-card__heading">{pokemon.name}</h3>
       </div>
     </>

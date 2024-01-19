@@ -107,14 +107,20 @@ function PokemonDetailPage() {
       </h2>
       <div className="pokemon-detail__imginfo-container">
         <section className="pokemon-detail__img-container">
-          <img
-            className="pokemon-detail__img"
-            src={pokemonDetail?.sprites.front_default}
-          />
-          <img
-            className="pokemon-detail__img"
-            src={pokemonDetail?.sprites.front_shiny}
-          />
+          {pokemonDetail.sprites.front_default ? (
+            <>
+              <img
+                src={pokemonDetail.sprites.front_default}
+                className="pokemon-detail__img"
+              />
+              <img
+                src={pokemonDetail.sprites.front_shiny}
+                className="pokemon-detail__img"
+              />
+            </>
+          ) : (
+            <p className="pokemon-detail__no-img">No sprite available</p>
+          )}
         </section>
         <section className="pokemon-detail__info">
           <div>

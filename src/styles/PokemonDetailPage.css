@@ -24,6 +24,7 @@
   border-radius: 2.5rem;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 2rem;
   width: max-content;
 }
@@ -31,6 +32,15 @@
 .pokemon-detail__img {
   min-height: 10vh;
   min-width: 10vw;
+}
+
+.pokemon-detail__no-img {
+  color: #000;
+  font-size: 2rem;
+  text-transform: capitalize;
+  margin: 0;
+  padding: 6vh 12vw;
+  text-wrap: nowrap;
 }
 
 .pokemon-detail__info {
@@ -129,7 +139,7 @@
   }
 }
 
-@media screen and (min-width: 627px) {
+@media screen and (min-width: 700px) {
   .pokemon-detail__info {
     flex-direction: row;
   }
