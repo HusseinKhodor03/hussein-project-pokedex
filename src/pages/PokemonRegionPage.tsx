@@ -18,6 +18,12 @@ function PokemonRegionPage() {
     isError: isRegionError,
   } = useRegion(name!);
 
+  function capitalizeFirstLetter(name: string) {
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  }
+
+  document.title = `Pokédex - ${capitalizeFirstLetter(name!)} Region Pokémon`;
+
   const { data: generation, isLoading: isGenerationLoading } = useGeneration(
     region?.main_generation?.name!
   );

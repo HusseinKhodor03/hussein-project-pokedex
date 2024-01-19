@@ -16,6 +16,18 @@ function PokemonDetailPage() {
     isError: isPokemonDetailError,
   } = usePokemonDetail(name!);
 
+  function transformName(name: string) {
+    const names = name.split("-");
+
+    const capitalizedNames = names.map(
+      (name) => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
+    );
+
+    return capitalizedNames.join(" ");
+  }
+
+  document.title = `Pokédex - ${transformName(name!)}`;
+
   const pokemonID = pokemonDetail?.id;
   const names: string[] = [];
 

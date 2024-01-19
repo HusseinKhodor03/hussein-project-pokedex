@@ -18,6 +18,18 @@ function PokemonGenerationPage() {
     isError: isGenerationError,
   } = useGeneration(name!);
 
+  function transformName(name: string) {
+    const names = name.split("-");
+
+    const capitalizedNames = names.map(
+      (name) => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
+    );
+
+    return capitalizedNames.join("-");
+  }
+
+  document.title = `Pokédex - ${transformName(name!)} Pokémon`;
+
   const urls: string[] = [];
 
   generation?.pokemon_species.forEach((pokemon) => {

@@ -12,6 +12,8 @@ function ErrorPage() {
   const error = useRouteError();
   const { name: name } = useParams();
 
+  document.title = "Pokédex - Not Found";
+
   const formattedName = name?.replace(/-/g, " ");
 
   let errorText: string = "";

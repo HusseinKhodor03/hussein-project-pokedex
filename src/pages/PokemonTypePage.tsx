@@ -17,6 +17,12 @@ function PokemonTypePage() {
     isError: isTypeError,
   } = useType(name!);
 
+  function capitalizeFirstLetter(name: string) {
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  }
+
+  document.title = `Pokédex - ${capitalizeFirstLetter(name!)} Type Pokémon`;
+
   const urls: string[] = [];
 
   pokemon?.pokemon.forEach((pokemon) => {
