@@ -26,7 +26,7 @@ function PokemonDetailPage() {
     return capitalizedNames.join(" ");
   }
 
-  document.title = `Pokédex - ${transformName(name!)}`;
+  document.title = `Pokédex - Pokémon: ${transformName(name!)}`;
 
   const pokemonID = pokemonDetail?.id;
   const names: string[] = [];
