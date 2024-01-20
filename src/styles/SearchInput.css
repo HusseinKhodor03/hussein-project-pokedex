@@ -5,14 +5,12 @@
   border: 0;
   outline: none;
   flex-grow: 1;
-  font-family: "Pokemon Solid", sans-serif;
   font-size: 1.5rem;
   letter-spacing: 1px;
   width: 100%;
 }
 
 .input::placeholder {
-  font-family: "Pokemon Solid", sans-serif;
   font-size: 1.5rem;
   letter-spacing: 1px;
 }
