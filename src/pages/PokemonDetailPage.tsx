@@ -135,7 +135,7 @@ function PokemonDetailPage() {
           )}
         </section>
         <section className="pokemon-detail__info">
-          <div>
+          <div id="types-container">
             <h3 className="pokemon-detail__info-heading">Types</h3>
             {pokemonDetail?.types.map((type, index) => {
               const typeColors = getTypeColor(type.type.name);
@@ -157,7 +157,7 @@ function PokemonDetailPage() {
             })}
           </div>
           <span className="line"></span>
-          <div>
+          <div id="measurements-container">
             <h3 className="pokemon-detail__info-heading">Measurements</h3>
             <p className="pokemon-detail__info-text">
               Weight: {pokemonDetail?.weight && pokemonDetail.weight / 10} kg
@@ -167,7 +167,7 @@ function PokemonDetailPage() {
             </p>
           </div>
           <span className="line"></span>
-          <div>
+          <div id="abilities-container">
             <h3 className="pokemon-detail__info-heading">Abilities</h3>
             {pokemonDetail?.abilities.map((ability, index) => (
               <p key={index} className="pokemon-detail__info-text">

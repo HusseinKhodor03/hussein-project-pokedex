@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
   padding: 3rem 2rem;
 }
 
@@ -34,6 +34,8 @@
 .nav__logo-text {
   font-size: 3.8rem;
   color: #fff;
+  position: relative;
+  top: 4.5px;
 }
 
 @media screen and (min-width: 595px) {

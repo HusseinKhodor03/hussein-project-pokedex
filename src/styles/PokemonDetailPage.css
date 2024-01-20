@@ -49,20 +49,20 @@
   border: 5px solid #202020;
   border-radius: 2.5rem;
   padding: 2vh 3vw;
-  gap: 3rem;
+  gap: 4rem;
   flex-direction: column;
   justify-content: center;
   width: max-content;
 }
 
 .pokemon-detail__info-heading {
-  margin: 0;
+  margin: 0 0 2rem;
   text-align: center;
   letter-spacing: 2px;
 }
 
 .pokemon-detail__info-text {
-  margin: 1.5rem 0 0;
+  margin: 1rem 0 0;
   text-transform: capitalize;
   text-align: center;
   font-size: 2rem;
@@ -77,14 +77,24 @@
 }
 
 #types {
-  padding: 0.35rem 1.35rem;
+  padding: 0.5rem 1.5rem;
   border-radius: 1.6rem;
   cursor: pointer;
   transition: transform 0.3s;
+  width: max-content;
 }
 
 #types:hover {
   transform: scale(1.05);
+}
+
+#types-container,
+#measurements-container,
+#abilities-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-self: center;
 }
 
 .pokemon-detail__stats-heading {
@@ -142,6 +152,7 @@
 @media screen and (min-width: 700px) {
   .pokemon-detail__info {
     flex-direction: row;
+    gap: 3rem;
   }
 
   .line {
