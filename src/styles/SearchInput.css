@@ -1,18 +1,11 @@
 /* Search Input */
 .input {
-  padding: 1.3rem;
+  padding: 0.25rem 1rem;
   border-radius: 30px;
   border: 0;
   outline: none;
-  flex-grow: 1;
-  font-size: 1.5rem;
-  letter-spacing: 1px;
+  font-size: 1.6rem;
   width: 100%;
-}
-
-.input::placeholder {
-  font-size: 1.5rem;
-  letter-spacing: 1px;
 }
 
 .input-group {
@@ -22,6 +15,10 @@
   display: flex;
   align-items: center;
   padding: 0.5rem;
-  width: 100%;
-  min-width: 20vw;
+}
+
+@media screen and (min-width: 300px) {
+  .input {
+    min-width: 20vw;
+  }
 }

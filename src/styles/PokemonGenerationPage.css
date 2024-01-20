@@ -7,16 +7,15 @@
   margin: 0;
   text-transform: capitalize;
   color: #b31212;
-  font-size: 3rem;
-  letter-spacing: 1.5px;
+  font-size: 4rem;
 }
 
 .pokemon-gen__cards {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  gap: 2rem 3rem;
-  padding: 2rem 1.5rem;
+  gap: 2rem;
+  padding: 3.2rem 2.4rem;
 }
 
 .pokemon-gen__btn {
@@ -24,10 +23,9 @@
   border: none;
   color: #fff;
   cursor: pointer;
-  padding: 1.2rem 3.5rem;
+  padding: 0.8rem 3.2rem;
   border-radius: 2.3rem;
-  letter-spacing: 1.5px;
-  font-size: 2.5rem;
+  font-size: 3.2rem;
   transition: transform 0.5s;
 }
 

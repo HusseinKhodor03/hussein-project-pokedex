@@ -12,8 +12,8 @@
 }
 
 .menu__list a {
-  letter-spacing: 2px;
   cursor: pointer;
+  font-size: 2.4rem;
 }
 
 .list__item {
@@ -21,11 +21,11 @@
   border: 2px solid #000;
   text-transform: capitalize;
   padding: 0.8rem;
-  letter-spacing: 1px;
   white-space: nowrap;
   text-align: center;
   cursor: pointer;
   transition: color 0.3s;
+  font-size: 2rem;
 }
 
 .list__item:hover {
@@ -46,7 +46,7 @@
 
 .dropdown-menu {
   position: absolute;
-  top: 3.9rem;
+  top: 4.55rem;
   background: #eee;
   opacity: 0;
   visibility: hidden;
@@ -70,15 +70,15 @@
 }
 
 #generations-dropdown {
-  left: -7px;
+  left: -5px;
 }
 
 #types-dropdown {
-  left: -8px;
+  left: -4px;
 }
 
 #regions-dropdown {
-  left: 7px;
+  left: 10px;
 }
 
 @media screen and (min-width: 305px) {
