@@ -1,13 +1,11 @@
 import "../styles/SearchIcon.css";
-import { AiOutlineSearch } from "react-icons/ai";
+import search from "../assets/search.svg";
 
 function SearchIcon() {
   return (
-    <>
-      <button className="icon-search-container">
-        <AiOutlineSearch className="icon-search" />
-      </button>
-    </>
+    <button className="icon-search-container">
+      <img className="icon-search" src={search} alt="" />
+    </button>
   );
 }
 
