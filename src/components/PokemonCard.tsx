@@ -4,16 +4,17 @@ import "../styles/PokemonCard.css";
 
 interface PokemonCardProps {
   pokemon: PokemonDetails;
+  isCurrentPokemon?: boolean;
 }
 
-function PokemonCard({ pokemon }: PokemonCardProps) {
+function PokemonCard({ pokemon, isCurrentPokemon }: PokemonCardProps) {
   const navigate = useNavigate();
 
   return (
     <>
       <div
         key={pokemon.id}
-        className="pokemon-card"
+        className={`pokemon-card ${isCurrentPokemon ? "current-pokemon" : ""}`}
         onClick={() => navigate(`/pokemon/${pokemon.name}`)}
       >
         {pokemon.sprites.front_default ? (

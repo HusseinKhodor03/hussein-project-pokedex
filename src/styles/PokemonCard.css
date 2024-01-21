@@ -11,6 +11,10 @@
   transition: transform 0.5s;
 }
 
+.current-pokemon {
+  background: orange;
+}
+
 .pokemon-card:hover {
   transform: scale(1.05);
 }

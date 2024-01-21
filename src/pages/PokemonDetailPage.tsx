@@ -7,6 +7,7 @@ import PokemonCard from "../components/PokemonCard";
 import LoadingSpinner from "../components/LoadingSpinner";
 import useErrorStore from "../store";
 import TypeBadge from "../components/TypeBadge";
+import EvolutionChain from "../components/EvolutionChain";
 
 function PokemonDetailPage() {
   const { name } = useParams();
@@ -110,7 +111,7 @@ function PokemonDetailPage() {
         <section className="pokemon-detail__info">
           <div id="types-container">
             <h3 className="pokemon-detail__info-heading">Types</h3>
-            {pokemonDetail.types.map((type, index) => (
+            {pokemonDetail?.types?.map((type, index) => (
               <TypeBadge key={index} typeName={type.type.name} />
             ))}
           </div>
@@ -127,7 +128,7 @@ function PokemonDetailPage() {
           <span className="line"></span>
           <div id="abilities-container">
             <h3 className="pokemon-detail__info-heading">Abilities</h3>
-            {pokemonDetail?.abilities.map((ability, index) => (
+            {pokemonDetail?.abilities?.map((ability, index) => (
               <p key={index} className="pokemon-detail__info-text">
                 {ability.ability.name.replace(/-/g, " ")}
               </p>
@@ -135,9 +136,13 @@ function PokemonDetailPage() {
           </div>
         </section>
       </div>
+      <h3 className="pokemon-detail__evo-chain-heading">Evolution Chain</h3>
+      <section className="pokemon-detail__evo-chain">
+        <EvolutionChain pokemon={pokemonDetail} />
+      </section>
       <h3 className="pokemon-detail__stats-heading">Stats</h3>
       <section className="pokemon-detail__stats">
-        {pokemonDetail?.stats.map((stat, index) => (
+        {pokemonDetail?.stats?.map((stat, index) => (
           <div key={index}>
             <p className="pokemon-detail__stats-text">
               {stat.stat.name.replace(/-/g, " ")}

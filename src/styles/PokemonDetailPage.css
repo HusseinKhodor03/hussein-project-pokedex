@@ -96,6 +96,26 @@
   align-self: center;
 }
 
+.pokemon-detail__evo-chain-heading {
+  color: #b31312;
+  font-size: 4rem;
+  margin: 6rem 0 3rem;
+}
+
+.pokemon-detail__evo-chain {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.right-arrow-icon {
+  height: 50px;
+  width: 50px;
+  transform: rotate(90deg);
+  transition: transform 0.3s ease-in-out;
+}
+
 .pokemon-detail__stats-heading {
   color: #b31312;
   margin: 7rem 0 2rem;
@@ -157,6 +177,24 @@
   }
 }
 
+@media screen and (min-width: 714px) {
+  .pokemon-detail__evo-chain {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .right-arrow-icon {
+    height: 50px;
+    width: 50px;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .pokemon-detail__heading {
     font-size: 5.6rem;
@@ -168,6 +206,10 @@
 
   .pokemon-detail__info-text {
     font-size: 2.6rem;
+  }
+
+  .pokemon-detail__evo-chain-heading {
+    font-size: 5.6rem;
   }
 
   .pokemon-detail__stats-heading {

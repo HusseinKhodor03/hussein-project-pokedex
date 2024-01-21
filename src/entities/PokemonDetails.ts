@@ -1,17 +1,17 @@
 export default interface PokemonDetails {
-  id: number;
+  id?: number;
   name: string;
-  height: number;
-  weight: number;
+  height?: number;
+  weight?: number;
   sprites: Sprites;
-  abilities: Ability[];
-  types: Type[];
-  stats: Stat[];
+  abilities?: Ability[];
+  types?: Type[];
+  stats?: Stat[];
 }
 
 interface Sprites {
   front_default: string;
-  front_shiny: string;
+  front_shiny?: string;
 }
 
 interface Ability {
