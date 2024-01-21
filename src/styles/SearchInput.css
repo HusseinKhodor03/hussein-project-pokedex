@@ -1,11 +1,14 @@
-/* Search Input
-.input {
+Search Input .input {
   padding: 0.25rem 1rem;
   border-radius: 30px;
   border: 0;
   outline: none;
   font-size: 1.6rem;
   width: 100%;
+}
+
+.input::placeholder {
+  color: #bbb;
 }
 
 .input-group {
@@ -21,27 +24,4 @@
   .input {
     min-width: 20vw;
   }
-} */
-
-.input {
-  padding: 1rem;
-  border-radius: 30px;
-  border: 0;
-  outline: none;
-  flex-grow: 1;
-  width: 100%;
-}
-
-.input::placeholder {
-  color: #bbb;
-}
-
-.input-group {
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 30px;
-  display: flex;
-  align-items: center;
-  padding: 0.5rem;
-  width: 30rem;
 }
