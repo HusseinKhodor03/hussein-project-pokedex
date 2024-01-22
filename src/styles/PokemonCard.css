@@ -9,10 +9,7 @@
   padding: 1.6rem;
   cursor: pointer;
   transition: transform 0.5s;
-}
-
-.current-pokemon {
-  background: orange;
+  position: relative;
 }
 
 .pokemon-card:hover {
@@ -47,4 +44,10 @@
 .pokemon-card__heading {
   text-transform: capitalize;
   font-size: 3rem;
+}
+
+/* Highlight current Pokemon on detail page */
+.current-pokemon {
+  background: #ff9500;
+  box-shadow: 0 0 30px rgba(255, 149, 0, 1);
 }
