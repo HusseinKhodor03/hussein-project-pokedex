@@ -1,0 +1,68 @@
+/* Evolution Chain */
+.evolution-chain-heading {
+  color: #b31312;
+  font-size: 4rem;
+  margin: 6rem 0 0;
+}
+
+.evolution-choices-title {
+  color: #b31312;
+  margin: 5rem 0 2.5rem;
+  font-size: 2.2rem;
+}
+
+.evolution-choices {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.evolution-sequential {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 5rem;
+}
+
+.right-arrow-icon {
+  height: 50px;
+  width: 50px;
+  transform: rotate(90deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+@media screen and (min-width: 736px) {
+  .evolution-choices {
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+
+  .evolution-sequential {
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .right-arrow-icon {
+    transform: rotate(0deg);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .evolution-chain-heading {
+    font-size: 5.6rem;
+  }
+
+  .evolution-choices-title {
+    font-size: 3.2rem;
+  }
+}

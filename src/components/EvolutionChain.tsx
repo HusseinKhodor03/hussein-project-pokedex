@@ -5,6 +5,8 @@ import usePokemonSpecies from "../hooks/usePokemonSpecies";
 import LoadingSpinner from "./LoadingSpinner";
 import PokemonCard from "./PokemonCard";
 import rightArrow from "../assets/right-arrow.svg";
+import usePokemonDetailsEvolution from "../hooks/usePokemonDetailsEvolution";
+import "../styles/EvolutionChain.css";
 
 interface EvolutionChainProps {
   pokemon: PokemonDetails;
@@ -20,80 +22,152 @@ function EvolutionChain({ pokemon }: EvolutionChainProps) {
   const { data: evolutionChain } = useEvolutionChain(evolutionChainID);
 
   const baseEvolution = evolutionChain?.chain.species.url;
-  const firstEvolution = evolutionChain?.chain.evolves_to?.[0]?.species.url;
-  const secondEvolution =
-    evolutionChain?.chain.evolves_to?.[0]?.evolves_to?.[0]?.species.url;
+  const evolvesTo = evolutionChain?.chain.evolves_to;
+  const sequentialEvolutions: string[] = [];
+  const choiceEvolutions: string[][] = [];
 
-  let evolutionListURLs: string[] = [];
+  let currentEvolvesTo = evolvesTo;
+
+  while (currentEvolvesTo?.length === 1) {
+    let { species, evolves_to } = currentEvolvesTo[0];
+    sequentialEvolutions.push(species.url);
+    currentEvolvesTo = evolves_to;
+  }
+
+  if (currentEvolvesTo && currentEvolvesTo.length >= 2) {
+    currentEvolvesTo.forEach((evolution) => {
+      const choiceEvolutionPath: string[] = [];
+      let currentChoice = evolution;
+
+      while (
+        currentChoice.evolves_to &&
+        currentChoice.evolves_to.length === 1
+      ) {
+        choiceEvolutionPath.push(currentChoice.species.url);
+        currentChoice = currentChoice.evolves_to[0];
+      }
+
+      choiceEvolutionPath.push(currentChoice.species.url);
+      choiceEvolutions.push(choiceEvolutionPath);
+    });
+  }
 
   if (baseEvolution) {
-    evolutionListURLs.push(baseEvolution);
+    sequentialEvolutions.unshift(baseEvolution);
   }
 
-  if (firstEvolution) {
-    evolutionListURLs.push(firstEvolution);
-  }
+  let sequentialEvolutionURLs: string[] = [];
+  let choiceEvolutionsURLs: string[][] = [];
 
-  if (secondEvolution) {
-    evolutionListURLs.push(secondEvolution);
-  }
-
-  const IDs: string[] = [];
-
-  evolutionListURLs.forEach((url) => {
-    const parts = url.split("/");
-    IDs.push(parts[parts.length - 2]);
+  sequentialEvolutions.forEach((url) => {
+    sequentialEvolutionURLs.push(url);
   });
 
-  const { data: evolutionDetails, isLoading: isEvolutionDetailsLoading } =
-    usePokemonDetails(IDs, 0);
-  let evolutionList: { pokemon_name: string; sprite: string }[] = [];
+  choiceEvolutions.forEach((evolutionPath) => {
+    const choiceEvolutionURLs: string[] = [];
+    evolutionPath.forEach((url) => {
+      choiceEvolutionURLs.push(url);
+    });
+    choiceEvolutionsURLs.push(choiceEvolutionURLs);
+  });
 
-  if (!pokemonSpecies) {
-    evolutionList = [
-      { pokemon_name: pokemon.name, sprite: pokemon.sprites.front_default },
-    ];
-  } else {
-    if (baseEvolution) {
-      evolutionList.push({
-        pokemon_name: evolutionDetails?.[0].name!,
-        sprite: evolutionDetails?.[0].sprites.front_default!,
-      });
-    }
-    if (firstEvolution) {
-      evolutionList.push({
-        pokemon_name: evolutionDetails?.[1].name!,
-        sprite: evolutionDetails?.[1].sprites.front_default!,
-      });
-    }
-    if (secondEvolution) {
-      evolutionList.push({
-        pokemon_name: evolutionDetails?.[2].name!,
-        sprite: evolutionDetails?.[2].sprites.front_default!,
-      });
-    }
+  const sequentialEvolutionIDs: string[] = [];
+  const choiceEvolutionIDs: string[][] = [];
+
+  sequentialEvolutionURLs.forEach((url) => {
+    const parts = url.split("/");
+    sequentialEvolutionIDs.push(parts[parts.length - 2]);
+  });
+
+  choiceEvolutionsURLs.forEach((evolutionPath) => {
+    const choiceEvolutionPathIDs: string[] = [];
+    evolutionPath.forEach((url) => {
+      const parts = url.split("/");
+      choiceEvolutionPathIDs.push(parts[parts.length - 2]);
+    });
+    choiceEvolutionIDs.push(choiceEvolutionPathIDs);
+  });
+
+  const {
+    data: sequentialEvolutionDetails,
+    isLoading: isSequentialEvolutionDetailsLoading,
+  } = usePokemonDetails(sequentialEvolutionIDs, 0);
+
+  let {
+    data: choiceEvolutionDetails,
+    isLoading: isChoiceEvolutionDetailsLoading,
+  } = usePokemonDetailsEvolution(choiceEvolutionIDs);
+
+  if (choiceEvolutionDetails && sequentialEvolutionDetails) {
+    choiceEvolutionDetails = choiceEvolutionDetails.map((evolutionPath) => [
+      ...sequentialEvolutionDetails,
+      ...evolutionPath,
+    ]);
   }
 
-  if (isPokemonSpeciesLoading || isEvolutionDetailsLoading)
+  if (
+    isPokemonSpeciesLoading ||
+    isSequentialEvolutionDetailsLoading ||
+    isChoiceEvolutionDetailsLoading
+  )
     return <LoadingSpinner />;
 
   return (
     <>
-      {evolutionList.map((evolution, index) => (
+      <h3 className="evolution-chain-heading">Evolution Chain</h3>
+      {!pokemonSpecies ? (
+        <PokemonCard isCurrentPokemon={true} pokemon={pokemon} />
+      ) : (
         <>
-          <PokemonCard
-            key={index}
-            isCurrentPokemon={pokemon.name === evolution.pokemon_name}
-            pokemon={{
-              name: evolution.pokemon_name,
-              sprites: { front_default: evolution.sprite },
-            }}
-          />
-          {index < evolutionList.length - 1 && (
-            <img className="right-arrow-icon" src={rightArrow} />
-          )}
+          {choiceEvolutionDetails &&
+            choiceEvolutionDetails.map((evolutionPath, index) => (
+              <>
+                <h3 className="evolution-choices-title">
+                  Evolution Chain #{index + 1}
+                </h3>
+                <div key={index} className="evolution-choices">
+                  {evolutionPath.map((evolution, index) => (
+                    <>
+                      <PokemonCard
+                        key={evolution.id}
+                        isCurrentPokemon={pokemon.id === evolution.id}
+                        pokemon={evolution}
+                      />
+                      {index < evolutionPath.length - 1 && (
+                        <img
+                          className="right-arrow-icon"
+                          src={rightArrow}
+                        ></img>
+                      )}
+                    </>
+                  ))}
+                </div>
+              </>
+            ))}
+          <section className="evolution-sequential">
+            {sequentialEvolutionDetails &&
+              !choiceEvolutionDetails?.some((evolutionPath) =>
+                evolutionPath.some((evolution) =>
+                  sequentialEvolutionDetails.some(
+                    (sequentialEvolution) =>
+                      sequentialEvolution.id === evolution.id
+                  )
+                )
+              ) &&
+              sequentialEvolutionDetails.map((evolution, index) => (
+                <>
+                  <PokemonCard
+                    isCurrentPokemon={pokemon.id === evolution.id}
+                    pokemon={evolution}
+                  />
+                  {index < sequentialEvolutionDetails.length - 1 && (
+                    <img className="right-arrow-icon" src={rightArrow}></img>
+                  )}
+                </>
+              ))}
+          </section>
         </>
-      ))}
+      )}
     </>
   );
 }

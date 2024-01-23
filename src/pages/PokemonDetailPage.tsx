@@ -136,10 +136,7 @@ function PokemonDetailPage() {
           </div>
         </section>
       </div>
-      <h3 className="pokemon-detail__evo-chain-heading">Evolution Chain</h3>
-      <section className="pokemon-detail__evo-chain">
-        <EvolutionChain pokemon={pokemonDetail} />
-      </section>
+      <EvolutionChain pokemon={pokemonDetail} />
       <h3 className="pokemon-detail__stats-heading">Stats</h3>
       <section className="pokemon-detail__stats">
         {pokemonDetail?.stats?.map((stat, index) => (

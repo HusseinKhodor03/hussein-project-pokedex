@@ -46,6 +46,21 @@ class APIClient<T> {
       .get<T>(this.endpoint + id)
       .then((response) => response.data);
   };
+
+  getPokemonDetailsEvolution = (paths: string[][]) => {
+    const requests: Promise<PokemonDetails[]>[] = [];
+
+    paths.forEach((path) => {
+      const pathRequests: Promise<PokemonDetails>[] = path.map((id) =>
+        axiosInstance
+          .get<PokemonDetails>(this.endpoint + id)
+          .then((response) => response.data)
+      );
+      requests.push(Promise.all(pathRequests));
+    });
+
+    return Promise.all(requests);
+  };
 }
 
 export default APIClient;
