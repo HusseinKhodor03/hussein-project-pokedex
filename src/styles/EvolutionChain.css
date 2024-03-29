@@ -1,4 +1,10 @@
 /* Evolution Chain */
+.no-pokemon-species {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
 .evolution-chain-heading {
   color: #b31312;
   font-size: 4rem;

@@ -6,7 +6,8 @@ import PokemonDetails from "../entities/PokemonDetails";
 import LoadingSpinner from "../components/LoadingSpinner";
 import PokemonCard from "../components/PokemonCard";
 import useGeneration from "../hooks/useGeneration";
-import useErrorStore from "../store";
+import useErrorStore from "../stores/error-store";
+import capitalizeFirstLetter from "../services/capitalize-first-letter";
 
 function PokemonRegionPage() {
   const pageSize = 15;
@@ -17,10 +18,6 @@ function PokemonRegionPage() {
     isLoading: isRegionLoading,
     isError: isRegionError,
   } = useRegion(name!);
-
-  function capitalizeFirstLetter(name: string) {
-    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-  }
 
   document.title = `Pokédex - ${capitalizeFirstLetter(name!)} Region Pokémon`;
 

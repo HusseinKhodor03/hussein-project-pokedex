@@ -2,7 +2,6 @@ import PokemonDetails from "../entities/PokemonDetails";
 import useEvolutionChain from "../hooks/useEvolutionChain";
 import usePokemonDetails from "../hooks/usePokemonDetails";
 import usePokemonSpecies from "../hooks/usePokemonSpecies";
-import LoadingSpinner from "./LoadingSpinner";
 import PokemonCard from "./PokemonCard";
 import rightArrow from "../assets/right-arrow.svg";
 import usePokemonDetailsEvolution from "../hooks/usePokemonDetailsEvolution";
@@ -13,8 +12,7 @@ interface EvolutionChainProps {
 }
 
 function EvolutionChain({ pokemon }: EvolutionChainProps) {
-  const { data: pokemonSpecies, isLoading: isPokemonSpeciesLoading } =
-    usePokemonSpecies(pokemon.name);
+  const { data: pokemonSpecies } = usePokemonSpecies(pokemon.name);
   const evolutionChainID = parseInt(
     pokemonSpecies?.evolution_chain.url.split("/").slice(-2, -1)[0]!
   );
@@ -88,15 +86,13 @@ function EvolutionChain({ pokemon }: EvolutionChainProps) {
     choiceEvolutionIDs.push(choiceEvolutionPathIDs);
   });
 
-  const {
-    data: sequentialEvolutionDetails,
-    isLoading: isSequentialEvolutionDetailsLoading,
-  } = usePokemonDetails(sequentialEvolutionIDs, 0);
+  const { data: sequentialEvolutionDetails } = usePokemonDetails(
+    sequentialEvolutionIDs,
+    0
+  );
 
-  let {
-    data: choiceEvolutionDetails,
-    isLoading: isChoiceEvolutionDetailsLoading,
-  } = usePokemonDetailsEvolution(choiceEvolutionIDs);
+  let { data: choiceEvolutionDetails } =
+    usePokemonDetailsEvolution(choiceEvolutionIDs);
 
   if (choiceEvolutionDetails && sequentialEvolutionDetails) {
     choiceEvolutionDetails = choiceEvolutionDetails.map((evolutionPath) => [
@@ -105,18 +101,13 @@ function EvolutionChain({ pokemon }: EvolutionChainProps) {
     ]);
   }
 
-  if (
-    isPokemonSpeciesLoading ||
-    isSequentialEvolutionDetailsLoading ||
-    isChoiceEvolutionDetailsLoading
-  )
-    return <LoadingSpinner />;
-
   return (
     <>
       <h3 className="evolution-chain-heading">Evolution Chain</h3>
       {!pokemonSpecies ? (
-        <PokemonCard isCurrentPokemon={true} pokemon={pokemon} />
+        <div className="no-pokemon-species">
+          <PokemonCard isCurrentPokemon={true} pokemon={pokemon} />
+        </div>
       ) : (
         <>
           {choiceEvolutionDetails &&

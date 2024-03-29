@@ -5,7 +5,8 @@ import usePokemonDetails from "../hooks/usePokemonDetails";
 import PokemonDetails from "../entities/PokemonDetails";
 import LoadingSpinner from "../components/LoadingSpinner";
 import PokemonCard from "../components/PokemonCard";
-import useErrorStore from "../store";
+import useErrorStore from "../stores/error-store";
+import capitalizeFirstLetter from "../services/capitalize-first-letter";
 
 function PokemonTypePage() {
   const pageSize = 15;
@@ -16,10 +17,6 @@ function PokemonTypePage() {
     isLoading: isTypeLoading,
     isError: isTypeError,
   } = useType(name!);
-
-  function capitalizeFirstLetter(name: string) {
-    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-  }
 
   document.title = `Pokédex - ${capitalizeFirstLetter(name!)} Type Pokémon`;
 

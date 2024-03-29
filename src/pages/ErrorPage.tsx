@@ -5,7 +5,7 @@ import {
   useRouteError,
 } from "react-router-dom";
 import "../styles/ErrorPage.css";
-import useErrorStore from "../store";
+import useErrorStore from "../stores/error-store";
 
 function ErrorPage() {
   const navigate = useNavigate();

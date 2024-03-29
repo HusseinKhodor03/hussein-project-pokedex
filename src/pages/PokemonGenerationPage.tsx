@@ -6,7 +6,8 @@ import PokemonDetails from "../entities/PokemonDetails";
 import PokemonCard from "../components/PokemonCard";
 import "../styles/PokemonGenerationPage.css";
 import LoadingSpinner from "../components/LoadingSpinner";
-import useErrorStore from "../store";
+import useErrorStore from "../stores/error-store";
+import capitalizeFirstLetter from "../services/capitalize-first-letter";
 
 function PokemonGenerationPage() {
   const pageSize = 15;
@@ -18,17 +19,10 @@ function PokemonGenerationPage() {
     isError: isGenerationError,
   } = useGeneration(name!);
 
-  function transformName(name: string) {
-    const names = name.split("-");
-
-    const capitalizedNames = names.map(
-      (name) => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
-    );
-
-    return capitalizedNames.join("-");
-  }
-
-  document.title = `Pokédex - ${transformName(name!)} Pokémon`;
+  document.title = `Pokédex - ${capitalizeFirstLetter(name!).replace(
+    / /g,
+    "-"
+  )} Pokémon`;
 
   const urls: string[] = [];
 
