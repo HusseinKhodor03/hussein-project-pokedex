@@ -1,0 +1,44 @@
+/* Pokemon Stats */
+.pokemon-stats-heading {
+  color: #b31312;
+  margin: 7rem 0 2rem;
+  font-size: 3.2rem;
+}
+
+.pokemon-stats {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.pokemon-stats__text {
+  color: #b31312;
+  padding-bottom: 0.5rem;
+  border-bottom: 4px solid #b31312;
+  width: max-content;
+  text-transform: capitalize;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.pokemon-stats__stat {
+  color: #000;
+  text-align: center;
+  font-size: 1.6rem;
+  margin: 1rem 0 0;
+}
+
+@media screen and (min-width: 768px) {
+  .pokemon-stats-heading {
+    font-size: 4.8rem;
+  }
+
+  .pokemon-stats__text {
+    font-size: 2.4rem;
+  }
+
+  .pokemon-stats__stat {
+    font-size: 2rem;
+  }
+}

@@ -9,6 +9,7 @@ import useErrorStore from "../stores/error-store";
 import EvolutionChain from "../components/EvolutionChain";
 import capitalizeFirstLetter from "../services/capitalize-first-letter";
 import PokemonImgInfo from "../components/PokemonImgInfo";
+import PokemonStats from "../components/PokemonStats";
 
 function PokemonDetailPage() {
   const { name } = useParams();
@@ -81,17 +82,7 @@ function PokemonDetailPage() {
     <section className="container pokemon-detail">
       <PokemonImgInfo pokemon={pokemonDetail} />
       <EvolutionChain pokemon={pokemonDetail} />
-      <h3 className="pokemon-detail__stats-heading">Stats</h3>
-      <section className="pokemon-detail__stats">
-        {pokemonDetail?.stats?.map((stat, index) => (
-          <div key={index}>
-            <p className="pokemon-detail__stats-text">
-              {stat.stat.name.replace(/-/g, " ")}
-            </p>
-            <p className="pokemon-detail__stats-stat">{stat.base_stat}</p>
-          </div>
-        ))}
-      </section>
+      <PokemonStats pokemon={pokemonDetail} />
       <h3 className="pokemon-detail__nearby-heading">
         Nearby Pokémon in the Pokédex
       </h3>
