@@ -1,0 +1,125 @@
+/* Pokemon Image Info */
+.pokemon-img-info-heading {
+  color: #b31312;
+  text-transform: capitalize;
+  margin: 1.5rem 0;
+  font-size: 4rem;
+}
+
+.pokemon-img-info-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.pokemon-img-info-container__img-container {
+  background: linear-gradient(45deg, #a2a297, #eee);
+  border: 5px solid #202020;
+  border-radius: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: max-content;
+}
+
+.img-container__img {
+  min-height: 10vh;
+  min-width: 10vw;
+}
+
+.img-container__no-img {
+  color: #000;
+  font-size: 2rem;
+  text-transform: capitalize;
+  margin: 0;
+  padding: 6vh 12vw;
+  text-wrap: nowrap;
+}
+
+.pokemon-img-info-container__info-container {
+  background: #b31312;
+  display: flex;
+  border: 5px solid #202020;
+  border-radius: 2.5rem;
+  padding: 2vh 3vw;
+  gap: 4rem;
+  flex-direction: column;
+  justify-content: center;
+  width: max-content;
+}
+
+.info-container__heading {
+  margin: 0 0 1.2rem;
+  text-align: center;
+  font-size: 3.2rem;
+}
+
+.info-container__text {
+  margin: 1rem 0 0;
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 2.4rem;
+}
+
+.line {
+  background: #202020;
+  width: 5px;
+  height: auto;
+  display: none;
+}
+
+#types {
+  padding: 0.4rem 1.2rem;
+  border-radius: 1.6rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+  width: max-content;
+}
+
+#types:hover {
+  transform: scale(1.05);
+}
+
+#types-container,
+#measurements-container,
+#abilities-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-self: center;
+}
+
+@media screen and (min-width: 400px) {
+  .img-container__img {
+    min-height: 15vh;
+    min-width: 15vw;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .pokemon-img-info-container__info-container {
+    flex-direction: row;
+    gap: 3rem;
+  }
+
+  .line {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .pokemon-img-info-heading {
+    font-size: 5.6rem;
+  }
+
+  .info-container__heading {
+    font-size: 3.6rem;
+  }
+
+  .info-container__text {
+    font-size: 2.6rem;
+  }
+}

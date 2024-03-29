@@ -34,7 +34,7 @@ function TypeBadge({ typeName }: TypeBadgeProps) {
 
   return (
     <p
-      className="pokemon-detail__info-text"
+      className="info-container__text"
       id="types"
       style={{
         background: typeColors.background,

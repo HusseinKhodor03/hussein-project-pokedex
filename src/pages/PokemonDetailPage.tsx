@@ -6,9 +6,9 @@ import usePokemonDetails from "../hooks/usePokemonDetails";
 import PokemonCard from "../components/PokemonCard";
 import LoadingSpinner from "../components/LoadingSpinner";
 import useErrorStore from "../stores/error-store";
-import TypeBadge from "../components/TypeBadge";
 import EvolutionChain from "../components/EvolutionChain";
 import capitalizeFirstLetter from "../services/capitalize-first-letter";
+import PokemonImgInfo from "../components/PokemonImgInfo";
 
 function PokemonDetailPage() {
   const { name } = useParams();
@@ -79,54 +79,7 @@ function PokemonDetailPage() {
 
   return (
     <section className="container pokemon-detail">
-      <h2 className="pokemon-detail__heading">
-        # {pokemonDetail?.id} - {pokemonDetail?.name.replace(/-/g, " ")}
-      </h2>
-      <div className="pokemon-detail__imginfo-container">
-        <section className="pokemon-detail__img-container">
-          {pokemonDetail.sprites.front_default ? (
-            <>
-              <img
-                src={pokemonDetail.sprites.front_default}
-                className="pokemon-detail__img"
-              />
-              <img
-                src={pokemonDetail.sprites.front_shiny}
-                className="pokemon-detail__img"
-              />
-            </>
-          ) : (
-            <p className="pokemon-detail__no-img">No sprite available</p>
-          )}
-        </section>
-        <section className="pokemon-detail__info">
-          <div id="types-container">
-            <h3 className="pokemon-detail__info-heading">Types</h3>
-            {pokemonDetail?.types?.map((type, index) => (
-              <TypeBadge key={index} typeName={type.type.name} />
-            ))}
-          </div>
-          <span className="line"></span>
-          <div id="measurements-container">
-            <h3 className="pokemon-detail__info-heading">Measurements</h3>
-            <p className="pokemon-detail__info-text">
-              Weight: {pokemonDetail?.weight && pokemonDetail.weight / 10} kg
-            </p>
-            <p className="pokemon-detail__info-text">
-              Height: {pokemonDetail?.height && pokemonDetail.height / 10} m
-            </p>
-          </div>
-          <span className="line"></span>
-          <div id="abilities-container">
-            <h3 className="pokemon-detail__info-heading">Abilities</h3>
-            {pokemonDetail?.abilities?.map((ability, index) => (
-              <p key={index} className="pokemon-detail__info-text">
-                {ability.ability.name.replace(/-/g, " ")}
-              </p>
-            ))}
-          </div>
-        </section>
-      </div>
+      <PokemonImgInfo pokemon={pokemonDetail} />
       <EvolutionChain pokemon={pokemonDetail} />
       <h3 className="pokemon-detail__stats-heading">Stats</h3>
       <section className="pokemon-detail__stats">
