@@ -8,6 +8,8 @@ import HomePageError from "./pages/HomePageError";
 import PokemonTypePage from "./pages/PokemonTypePage";
 import PokemonRegionPage from "./pages/PokemonRegionPage";
 import ScrollToTop from "./components/ScrollToTop";
+import { Suspense } from "react";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 const router = createBrowserRouter([
   {
@@ -23,22 +25,38 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       {
         path: "generation/:name",
-        element: <PokemonGenerationPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PokemonGenerationPage />
+          </Suspense>
+        ),
         errorElement: <ErrorPage />,
       },
       {
         path: "pokemon/:name",
-        element: <PokemonDetailPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PokemonDetailPage />
+          </Suspense>
+        ),
         errorElement: <ErrorPage />,
       },
       {
         path: "type/:name",
-        element: <PokemonTypePage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PokemonTypePage />
+          </Suspense>
+        ),
         errorElement: <ErrorPage />,
       },
       {
         path: "region/:name",
-        element: <PokemonRegionPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PokemonRegionPage />
+          </Suspense>
+        ),
         errorElement: <ErrorPage />,
       },
     ],

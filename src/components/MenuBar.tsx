@@ -20,10 +20,6 @@ function MenuBar() {
     (type) => type.name !== "shadow" && type.name !== "unknown"
   );
 
-  const filteredRegions = regions?.results.filter(
-    (region) => region.name !== "hisui"
-  );
-
   const closeAllDropdowns = () => {
     setGenerationsVisible(false);
     setTypesVisible(false);
@@ -149,7 +145,7 @@ function MenuBar() {
               className={`dropdown-menu ${isRegionsVisible ? "visible" : ""}`}
             >
               <ul className="list">
-                {filteredRegions?.map((region) => (
+                {regions?.results.map((region) => (
                   <li
                     className="list__item"
                     key={region.name}
