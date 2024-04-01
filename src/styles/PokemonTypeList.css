@@ -1,0 +1,35 @@
+/* Pokemon Type List */
+.pokemon-type-heading {
+  margin: 0;
+  text-transform: capitalize;
+  color: #b31212;
+  font-size: 4rem;
+}
+
+.pokemon-type-cards {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 3.2rem 2.4rem;
+}
+
+.pokemon-type-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.pokemon-type-btn-container__btn {
+  background: #b31212;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.8rem 3.2rem;
+  border-radius: 2.3rem;
+  font-size: 3.2rem;
+  transition: transform 0.5s;
+}
+
+.pokemon-type-btn-container__btn:hover {
+  transform: scale(1.05);
+}

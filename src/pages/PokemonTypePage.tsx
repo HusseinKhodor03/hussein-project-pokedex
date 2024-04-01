@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
-import useType from "../hooks/useType";
-import useErrorStore from "../stores/error-store";
-import capitalizeFirstLetter from "../services/capitalize-first-letter";
 import PokemonTypeList from "../components/PokemonTypeList";
+import useType from "../hooks/useType";
+import capitalizeFirstLetter from "../services/capitalize-first-letter";
+import useErrorStore from "../stores/error-store";
+import "../styles/PokemonTypePage.css";
 
 function PokemonTypePage() {
   const { name } = useParams();
@@ -24,7 +25,7 @@ function PokemonTypePage() {
   if (isNaNError || isEmptyArrayError) throw new Error();
 
   return (
-    <section className="container pokemon-gen">
+    <section className="container pokemon-type">
       <PokemonTypeList name={name!} pokemonTypeList={pokemonTypeList!} />
     </section>
   );

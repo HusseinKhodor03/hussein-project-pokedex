@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import PokemonCard from "./PokemonCard";
-import usePokemonDetails from "../hooks/usePokemonDetails";
 import PokemonDetails from "../entities/PokemonDetails";
 import Region from "../entities/Region";
 import usePokedex from "../hooks/usePokedex";
+import usePokemonDetails from "../hooks/usePokemonDetails";
+import "../styles/PokemonRegionList.css";
+import PokemonCard from "./PokemonCard";
 
 interface PokemonRegionListProps {
   name: string;
@@ -60,15 +61,18 @@ function PokemonRegionList({
 
   return (
     <>
-      <h2 className="pokemon-gen__heading">Pokémon from the {name} region</h2>
-      <div className="pokemon-gen__cards">
+      <h2 className="pokemon-region-heading">Pokémon from the {name} region</h2>
+      <div className="pokemon-region-cards">
         {displayedPokemon.map((pokemonName, index) => (
           <PokemonCard key={index} pokemon={pokemonName} />
         ))}
       </div>
       {displayedPokemon.length < pokemonDetails?.length! && (
-        <div className="pokemon-gen__btn-container">
-          <button onClick={handleLoadMoreClick} className="pokemon-gen__btn">
+        <div className="pokemon-region-btn-container">
+          <button
+            onClick={handleLoadMoreClick}
+            className="pokemon-region-btn-container__btn"
+          >
             Load More
           </button>
         </div>

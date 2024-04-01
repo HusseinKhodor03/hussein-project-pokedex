@@ -3,6 +3,7 @@ import GenerationDetails from "../entities/GenerationDetails";
 import PokemonCard from "./PokemonCard";
 import usePokemonDetails from "../hooks/usePokemonDetails";
 import PokemonDetails from "../entities/PokemonDetails";
+import "../styles/PokemonGenerationList.css";
 
 interface PokemonGenerationListProps {
   name: string;
@@ -60,15 +61,18 @@ function PokemonGenerationList({
 
   return (
     <>
-      <h2 className="pokemon-gen__heading">{name} Pokémon</h2>
-      <div className="pokemon-gen__cards">
+      <h2 className="pokemon-generation-heading">{name} Pokémon</h2>
+      <div className="pokemon-generation-cards">
         {displayedPokemon.map((pokemonName, index) => (
           <PokemonCard key={index} pokemon={pokemonName} />
         ))}
       </div>
       {displayedPokemon.length < pokemonDetails?.length! && (
-        <div className="pokemon-gen__btn-container">
-          <button onClick={handleLoadMoreClick} className="pokemon-gen__btn">
+        <div className="pokemon-generation-btn-container">
+          <button
+            onClick={handleLoadMoreClick}
+            className="pokemon-generation-btn-container__btn"
+          >
             Load More
           </button>
         </div>

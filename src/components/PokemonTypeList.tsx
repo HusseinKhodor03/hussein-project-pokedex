@@ -3,6 +3,7 @@ import Type from "../entities/Type";
 import PokemonCard from "./PokemonCard";
 import usePokemonDetails from "../hooks/usePokemonDetails";
 import PokemonDetails from "../entities/PokemonDetails";
+import "../styles/PokemonTypeList.css";
 
 interface PokemonTypeListProps {
   name: string;
@@ -55,15 +56,18 @@ function PokemonTypeList({ pokemonTypeList, name }: PokemonTypeListProps) {
 
   return (
     <>
-      <h2 className="pokemon-gen__heading">{name} Type Pokémon</h2>
-      <div className="pokemon-gen__cards">
+      <h2 className="pokemon-type-heading">{name} Type Pokémon</h2>
+      <div className="pokemon-type-cards">
         {displayedPokemon.map((pokemonName, index) => (
           <PokemonCard key={index} pokemon={pokemonName} />
         ))}
       </div>
       {displayedPokemon.length < pokemonDetails?.length! && (
-        <div className="pokemon-gen__btn-container">
-          <button onClick={handleLoadMoreClick} className="pokemon-gen__btn">
+        <div className="pokemon-type-btn-container">
+          <button
+            onClick={handleLoadMoreClick}
+            className="pokemon-type-btn-container__btn"
+          >
             Load More
           </button>
         </div>

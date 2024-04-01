@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
-import useRegion from "../hooks/useRegion";
-import useErrorStore from "../stores/error-store";
-import capitalizeFirstLetter from "../services/capitalize-first-letter";
 import PokemonRegionList from "../components/PokemonRegionList";
+import useRegion from "../hooks/useRegion";
+import capitalizeFirstLetter from "../services/capitalize-first-letter";
+import useErrorStore from "../stores/error-store";
+import "../styles/PokemonRegionPage.css";
 
 function PokemonRegionPage() {
   const { name } = useParams();
@@ -17,7 +18,7 @@ function PokemonRegionPage() {
   if (isNaNError) throw new Error();
 
   return (
-    <section className="container pokemon-gen">
+    <section className="container pokemon-region">
       <PokemonRegionList name={name!} pokemonRegionList={pokemonRegionList!} />
     </section>
   );
