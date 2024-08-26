@@ -10,6 +10,7 @@ import PokemonRegionPage from "./pages/PokemonRegionPage";
 import ScrollToTop from "./components/ScrollToTop";
 import { Suspense } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
+import SearchedPokemonPage from "./pages/SearchedPokemonPage";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,15 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingSpinner />}>
             <PokemonRegionPage />
+          </Suspense>
+        ),
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "search-results/:query",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <SearchedPokemonPage />
           </Suspense>
         ),
         errorElement: <ErrorPage />,
