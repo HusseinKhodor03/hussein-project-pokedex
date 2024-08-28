@@ -10,7 +10,6 @@ import NearbyPokemon from "../components/NearbyPokemon";
 
 function PokemonDetailPage() {
   const { name } = useParams();
-  console.log(name);
 
   const { data: pokemonDetail } = usePokemonDetail(name!);
 

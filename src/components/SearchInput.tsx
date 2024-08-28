@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import "../styles/SearchInput.css";
 import SearchIcon from "./SearchIcon";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -22,6 +22,13 @@ function SearchInput() {
     }
   };
 
+  useEffect(() => {
+    if (ref.current && !location.pathname.startsWith("/search-results")) {
+      ref.current.value = "";
+      ref.current.blur();
+    }
+  }, [location.pathname]);
+
   return (
     <form
       onSubmit={(event) => {
@@ -33,8 +40,6 @@ function SearchInput() {
               .trim()
               .replace(/\s+/g, "-")}`
           );
-          ref.current.value = "";
-          ref.current.blur();
         }
       }}
     >
