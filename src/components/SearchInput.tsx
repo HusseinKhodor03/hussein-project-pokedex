@@ -9,7 +9,7 @@ function SearchInput() {
   const location = useLocation();
 
   const handleSearch = () => {
-    const query = ref.current?.value.toLowerCase().trim();
+    const query = ref.current?.value.toLowerCase().trim().replace(/\s+/g, "-");
 
     if (query) {
       if (location.pathname !== "/search-results") {

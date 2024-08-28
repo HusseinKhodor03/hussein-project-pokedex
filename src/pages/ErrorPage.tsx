@@ -9,14 +9,15 @@ import { AxiosError } from "axios";
 
 function ErrorPage() {
   const error = useRouteError() as AxiosError;
-  const { name: name } = useParams();
+  const { name, query } = useParams();
 
   document.title = "Pokédex - Not Found";
 
-  const formattedName = name?.replace(/-/g, " ");
+  const formattedName = (name ?? query)?.replace(/-/g, " ");
 
   let errorText: string = "";
-  const { isNaNError, isEmptyArrayError } = useErrorStore();
+  const { isNaNError, isEmptyArrayError, isSearchEmptyArrayError } =
+    useErrorStore();
 
   if (error?.request?.responseURL.includes("pokemon")) {
     errorText = `The Pokémon "${formattedName}" was not found.`;
@@ -31,6 +32,8 @@ function ErrorPage() {
     errorText = `No Pokémon was found in the "${formattedName}" region.`;
   } else if (isNaNError) {
     errorText = `The filter "${formattedName}" is not valid.`;
+  } else if (isSearchEmptyArrayError) {
+    errorText = `No Pokémon was found for the search term "${formattedName}".`;
   } else if (isRouteErrorResponse(error)) {
     const startIndex = error.error?.message.indexOf('"');
     const endIndex = error.error?.message.indexOf('"', startIndex! + 1);

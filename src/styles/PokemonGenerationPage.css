@@ -1,6 +1,4 @@
 /* Generation Page */
-.pokemon-generation,
-.pokemon-type,
-.pokemon-region {
+.pokemon-generation {
   padding: 3vh 4vw;
 }
