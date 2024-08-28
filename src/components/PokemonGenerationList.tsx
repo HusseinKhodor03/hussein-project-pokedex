@@ -38,24 +38,24 @@ function PokemonGenerationList({
     []
   );
 
-  useEffect(() => {
+  const loadInitialBatch = () => {
+    const initialBatch = pokemonDetails?.slice(0, pageSize) || [];
+    setDisplayedPokemon(initialBatch);
     setPage(1);
-    setDisplayedPokemon([]);
+  };
+
+  useEffect(() => {
+    loadInitialBatch();
   }, [name]);
 
-  useEffect(() => {
-    if (pokemonDetails) {
-      const startIndex = (page - 1) * pageSize;
-      const endIndex = startIndex + pageSize;
-      const nextBatch = pokemonDetails.slice(startIndex, endIndex);
-      setDisplayedPokemon((prevDisplayedPokemon) => [
-        ...prevDisplayedPokemon,
-        ...nextBatch,
-      ]);
-    }
-  }, [page, pokemonDetails]);
-
   const handleLoadMoreClick = () => {
+    const startIndex = page * pageSize;
+    const endIndex = startIndex + pageSize;
+    const nextBatch = pokemonDetails?.slice(startIndex, endIndex) || [];
+    setDisplayedPokemon((prevDisplayedPokemon) => [
+      ...prevDisplayedPokemon,
+      ...nextBatch,
+    ]);
     setPage((prevPage) => prevPage + 1);
   };
 
